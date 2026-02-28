@@ -5,6 +5,8 @@ import { ScrollSequence } from "@/components/animation/ScrollSequence";
 import { ArrowRight } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Image from "next/image";
+import Link from "next/link";
+
 
 export default function Home() {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -73,9 +75,10 @@ export default function Home() {
               <span>Explore my work</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-500" />
             </button>
-            <button className="flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-transparent text-white border border-white/20 rounded-full font-medium tracking-wide hover:bg-white/5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+            <Link href="/projects" className="flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-transparent text-white border border-white/20 rounded-full font-medium tracking-wide hover:bg-white/5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
               Work
-            </button>
+            </Link>
+
           </motion.div>
         </motion.div>
       </section>
