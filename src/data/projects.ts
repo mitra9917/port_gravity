@@ -61,6 +61,33 @@ export const projects: Project[] = [
             achieved: "Built a complete end-to-end full-stack fitness application; Gained hands-on experience with Supabase Auth, PostgreSQL, and relational data modeling; Implemented real-time fitness analytics and progress visualization; Successfully deployed and maintained a production-ready web application; Improved understanding of scalable UI design and state-driven dashboards",
             relevance: "Fitness and health tracking platforms; Data-driven dashboards and analytics applications; SaaS products with authentication and personalized user data; Full-stack web applications requiring structured data, analytics, and clean UI/UX"
         }
+    }, {
+        slug: "vision_badminton_engine",
+        title: "Vision‑Based Badminton Game Engine",
+        description: "A real-time badminton game engine controlled via computer vision, featuring hand-tracked shot detection, AI-driven rallies, and a ground‑view 2.5D court with realistic gameplay mechanics.",
+        techStack: [
+            "Python",
+            "OpenCV",
+            "MediaPipe",
+            "Computer Vision",
+            "Game State Machines",
+            "AI Logic"
+        ],
+        liveUrl: "",
+        codeUrl: "https://github.com/mitra9917/badminton-ai-engine",
+        overview: {
+            problem: "Most sports games rely on traditional controllers and lack realistic physical interaction, while vision-based sports simulations often fail to provide responsive gameplay or believable spatial depth.",
+            solution: "This engine enables players to control a badminton game using real-time hand movements, translating physical gestures into shot types and rallies within a ground‑view perspective court.",
+            purpose: "The project was built to explore the intersection of computer vision, game engines, and AI-driven interaction by simulating a real sport with gesture-based controls and intelligent opponents."
+        },
+        technical: {
+            architecture: "A modular Python game loop with OpenCV rendering, MediaPipe-based hand tracking for input, a state-driven game engine for rallies, and rule-based AI for opponent behavior, cleanly separating logic, input, and visuals.",
+            challenges: "Key challenges included stabilizing noisy vision input, synchronizing gesture detection with game states, preventing unrealistic shuttle behavior, and achieving a convincing ground‑view perspective without a full 3D engine."
+        },
+        outcome: {
+            achieved: "Built a fully playable vision-controlled badminton engine; implemented shot classification, AI rallies, and skill-based catching; designed a 2.5D ground‑view court with perspective, net height illusion, and mesh rendering.",
+            relevance: "Computer vision–driven games; AI-assisted sports simulations; gesture-controlled interfaces; real-time interactive systems; foundations for future full‑3D sports game development."
+        }
     }
 ];
 
