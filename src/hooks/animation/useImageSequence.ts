@@ -46,50 +46,27 @@ export function useImageSequence({
 
                 img.onerror = () => {
                     console.warn(`Failed to load image: ${img.src}, using empty fallback.`);
-                    // Resolve with dummy image to prevent sequence failure
                     resolve(new Image());
                 };
             });
         };
 
-        const loadImagesOptimized = async () => {
-            // Chunk 1: The first 5 frames are critical to show the initial state immediately
-            const initialPromises = [];
-            for (let i = 0; i < Math.min(5, frameCount); i++) {
-                initialPromises.push(loadImage(i));
+        const loadAllImages = async () => {
+            const promises = [];
+            for (let i = 0; i < frameCount; i++) {
+                promises.push(loadImage(i));
             }
-            await Promise.all(initialPromises);
 
-            if (!isMounted) return;
+            await Promise.all(promises);
 
-            // We can start rendering as soon as the first few images are ready!
-            setImages([...loadedImages]);
-            setLoaded(true); // Signal readiness early to improve First Contentful Paint (FCP)
-
-            // Chunk 2: Load the rest in smaller batches so we don't block the main thread
-            // or overwhelm the network queue, allowing interaction to remain smooth.
-            const batchSize = 10;
-            for (let i = 5; i < frameCount; i += batchSize) {
-                if (!isMounted) return;
-
-                const batchPromises = [];
-                for (let j = i; j < Math.min(i + batchSize, frameCount); j++) {
-                    batchPromises.push(loadImage(j));
-                }
-                await Promise.all(batchPromises);
-
-                // Update images array cautiously without causing too many React re-renders
-                if (isMounted) {
-                    setImages([...loadedImages]);
-                }
-
-                // Yield to main thread
-                await new Promise(r => setTimeout(r, 10));
+            if (isMounted) {
+                setImages([...loadedImages]);
+                setLoaded(true); // Only signal ready when EVERY image is buffered in memory
             }
         };
 
         if (frameCount > 0) {
-            loadImagesOptimized();
+            loadAllImages();
         }
 
         return () => {
