@@ -47,7 +47,7 @@ export default function About() {
                     <motion.div variants={fadeIn} className="relative aspect-square w-full max-w-md mx-auto md:ml-auto">
                         {/* Using a placeholder for the personal photo, using a sleek dark gradient as structural fill */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-white/10 rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
-                            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay grayscale"></div>
+                            <div className="absolute inset-0 bg-[url('/Professional_mitra.png')] bg-cover bg-center rounded-2xl bg-no-repeat w-full opacity-60"></div>
                         </div>
                     </motion.div>
                 </motion.div>
