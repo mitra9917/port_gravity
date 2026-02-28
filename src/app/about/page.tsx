@@ -64,10 +64,20 @@ export default function About() {
                         My Story
                     </motion.h2>
                     <motion.p variants={fadeIn} className="text-lg text-white/70 leading-relaxed">
-                        My journey into software development started at the intersection of structural design and digital art. I&apos;ve always been fascinated by how invisible logic can power deeply emotional, visual experiences. Over the past five years, I&apos;ve transitioned from crafting static graphic designs to architecting fluid, motion-driven web applications.
+                        My journey into software development began with curiosity about how ideas
+                        turn into real, usable systems. I was drawn to the way code connects logic,
+                        design, and user experience into something people can actually interact with.
                     </motion.p>
                     <motion.p variants={fadeIn} className="text-lg text-white/70 leading-relaxed">
-                        I believe that performance and aesthetics are not mutually exclusive. A truly premium digital product must feel as lightweight and fast as it looks sophisticated. This philosophy drives every line of code I write.
+                        As a Computer Science undergraduate, I’ve been exploring full-stack development
+                        by building projects that combine modern interfaces with supporting backend logic.
+                        Along the way, I’ve also started experimenting with applied AI features to
+                        understand how intelligent systems can enhance real-world applications.
+                    </motion.p>
+                    <motion.p variants={fadeIn} className="text-lg text-white/70 leading-relaxed">
+                        I’m especially interested in learning how good software balances clarity,
+                        performance, and usability. Each project I work on helps me better understand
+                        how thoughtful engineering choices shape reliable and scalable products.
                     </motion.p>
                 </motion.div>
 

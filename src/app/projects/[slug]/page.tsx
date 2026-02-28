@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Code2, Layout, Database, Zap } from "lucide-react";
+import { ArrowUpRight, Github, ExternalLink, Code2, Layout, Database, Zap } from "lucide-react";
 import Link from "next/link";
 import { getProjectBySlug } from "@/data/projects";
 import { notFound } from "next/navigation";
@@ -175,22 +175,14 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="flex flex-col sm:flex-row items-center gap-6 pt-16 border-t border-white/10"
                 >
-                    <a
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        href={projectData.liveUrl}
-                        className="flex justify-center items-center w-full sm:w-auto px-10 py-4 bg-white text-black rounded-full font-medium tracking-wide hover:scale-[1.02] active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    >
-                        View Live Project
+                    <a rel="noopener noreferrer" target="_blank" href={projectData.liveUrl} className="flex justify-center items-center gap-3 group w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-medium tracking-wide hover:scale-105 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                        <span>View Live Project</span>
+                        <ExternalLink className="w-5 h-5 group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500" />
                     </a>
 
-                    <a
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        href={projectData.codeUrl}
-                        className="flex justify-center items-center w-full sm:w-auto px-10 py-4 bg-transparent text-white border border-white/20 rounded-full font-medium tracking-wide hover:bg-white/5 hover:border-white/40 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    >
-                        View Source Code
+                    <a rel="noopener noreferrer" target="_blank" href={projectData.codeUrl} className="flex justify-center items-center gap-3 w-full sm:w-auto px-8 py-4 bg-transparent text-white border border-white/20 rounded-full font-medium tracking-wide hover:bg-white/5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                        <Github className="w-5 h-5 opacity-70" />
+                        <span>View Source Code</span>
                     </a>
                 </motion.div>
 
