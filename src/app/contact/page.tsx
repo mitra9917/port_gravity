@@ -16,16 +16,34 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: "634374a7-2135-4a19-9b5c-cfef17dd6072",
+                    name: formState.name,
+                    email: formState.email,
+                    message: formState.message,
+                }),
+            });
 
-        // Simulate network request for the form
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        setFormState({ name: "", email: "", message: "" });
-
-        // Reset success state after 3 seconds
-        setTimeout(() => setIsSuccess(false), 3000);
+            const result = await response.json();
+            if (result.success) {
+                setIsSuccess(true);
+                setFormState({ name: "", email: "", message: "" });
+                setTimeout(() => setIsSuccess(false), 5000);
+            } else {
+                console.error("Form submission failed:", result);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
