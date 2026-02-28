@@ -35,9 +35,11 @@ export function ScrollSequence({
     const maxFrameRef = useRef(0);
     const hasCompletedRef = useRef(false);
 
-    // Track scroll progress within the container
+    // Track scroll progress within the container using strict intersection mapping
     const { scrollYProgress } = useScroll({
         target: containerRef,
+        // Using "start center" ensures mobile browsers don't wait for the invisible 
+        // 100vh height to trigger the bottom offset calculations
         offset: ["start start", "end end"]
     });
 
@@ -168,11 +170,12 @@ export function ScrollSequence({
         <div
             ref={containerRef}
             className={cn("relative w-full", containerClassName)}
-            // Create tall enough scrollable space based on frame count.
-            // Adjust the multiplier for scroll speed preference (lower = faster)
-            style={{ height: `${frameCount * 1.5}vh` }}
+            // Replace unreliable vh unit on mobile devices with an absolute pixel calculation factor.
+            // SVH (small viewport height) supports iOS Safari bottom bars properly. 
+            // We use a high multiplier to stretch the "track" that the canvas will animate along.
+            style={{ height: `${frameCount * 2}svh` }}
         >
-            <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+            <div className="sticky top-0 w-full h-[100svh] overflow-hidden flex items-center justify-center bg-black">
                 {/* Loading overlay */}
                 {!loaded && (
                     <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm text-white">

@@ -3,40 +3,22 @@
 import { motion } from "framer-motion";
 import { ScrollSequence } from "@/components/animation/ScrollSequence";
 import { ArrowRight } from "lucide-react";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
-import Image from "next/image";
 import Link from "next/link";
 
 
 export default function Home() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
   return (
     <div className="flex flex-col w-full min-h-screen bg-black">
       {/* Hero Animation Section */}
       <section className="relative w-full bg-black z-0">
-        {isMobile ? (
-          <div className="w-full h-[80vh] relative flex items-center justify-center">
-            {/* Fallback Static Hero for Mobile Performance */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black z-10" />
-            <Image
-              src="/assets/hero-sequence/keyboard sequence/00192.png"
-              alt="Hero Fallback"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        ) : (
-          <ScrollSequence
-            frameCount={192}
-            folderPath="/assets/hero-sequence/keyboard sequence"
-            prefix=""
-            indexPadding={5}
-            extension="png"
-            playOnce={false}
-          />
-        )}
+        <ScrollSequence
+          frameCount={192}
+          folderPath="/assets/hero-sequence/keyboard sequence"
+          prefix=""
+          indexPadding={5}
+          extension="png"
+          playOnce={false}
+        />
 
         {/* Absolute overlay at the very bottom of the scroll sequence container if we wanted it to overlay perfectly at the end, 
             but standard scrollflow handles this elegantly by placing the next section organically below it. 
