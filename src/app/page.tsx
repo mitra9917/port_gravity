@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ScrollSequence } from "@/components/animation/ScrollSequence";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+
 
 
 export default function Home() {

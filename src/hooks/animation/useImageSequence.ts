@@ -74,7 +74,7 @@ export function useImageSequence({
             // Note: Full memory collection of 190 Image objects will happen
             // when the component unmounts and references are dropped automatically.
         };
-    }, [frameCount, folderPath, prefix, extension]);
+    }, [frameCount, folderPath, prefix, extension, indexPadding]);
 
     return { images, loaded, progress };
 }
