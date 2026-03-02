@@ -2,15 +2,12 @@
 
 import { useRef, useEffect } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useImageSequence } from "@/hooks/animation/useImageSequence";
+import { useSpriteSheet } from "@/hooks/animation/useSpriteSheet";
 import { cn } from "@/lib/utils";
 
 interface ScrollSequenceProps {
     frameCount: number;
     folderPath: string;
-    prefix?: string;
-    indexPadding?: number;
-    extension?: string;
     className?: string;
     containerClassName?: string;
     fallbackColor?: string;
@@ -21,9 +18,6 @@ interface ScrollSequenceProps {
 export function ScrollSequence({
     frameCount,
     folderPath,
-    prefix,
-    indexPadding,
-    extension,
     className,
     containerClassName,
     fallbackColor = "#000000",
@@ -43,13 +37,10 @@ export function ScrollSequence({
         offset: ["start start", "end end"]
     });
 
-    // Load and cache all images
-    const { images, loaded, progress } = useImageSequence({
-        frameCount,
+    // Load the 8 hardware-safe Sprite Sheets
+    const { sprites, loaded, progress } = useSpriteSheet({
         folderPath,
-        prefix,
-        indexPadding,
-        extension,
+        sheetCount: 8
     });
 
     // Map scroll progress (0-1) to frame index (0 to frameCount - 1)
@@ -61,33 +52,29 @@ export function ScrollSequence({
 
     // Render function using requestAnimationFrame for smooth performance
     const renderFrame = (index: number) => {
-        if (!loaded || !canvasRef.current || images.length === 0) return;
+        if (!loaded || !canvasRef.current || !sprites || sprites.length === 0) return;
 
         // Ensure index is within bounds and rounded safely
         const safeIndex = Math.min(Math.max(0, Math.round(index)), frameCount - 1);
 
-        // Find the absolute closest loaded frame to prevent blank drops
-        // on slow networks where the backfill pass hasn't completed yet.
-        let img = images[safeIndex];
+        // Calculate which of the 8 sheets this frame belongs to
+        const FRAMES_PER_SHEET = 24;
+        const sheetIndex = Math.floor(safeIndex / FRAMES_PER_SHEET);
+        const localIndex = safeIndex % FRAMES_PER_SHEET;
 
-        if (!img) {
-            // We search up to 12 frames away (because our keyframe distance is 8)
-            // This guarantees an image will ALWAYS be found, even on a completely throttled network.
-            for (let offset = 1; offset <= 12; offset++) {
-                // Check backwards first (previous state is usually more natural than future state during a forward scroll)
-                if (safeIndex - offset >= 0 && images[safeIndex - offset]) {
-                    img = images[safeIndex - offset];
-                    break;
-                }
-                // Check forwards
-                if (safeIndex + offset < frameCount && images[safeIndex + offset]) {
-                    img = images[safeIndex + offset];
-                    break;
-                }
-            }
-        }
+        const sprite = sprites[sheetIndex];
+        if (!sprite) return;
 
-        if (!img) return;
+        // Find the specific coordinate box on the Sprite Sheet
+        // Assumes a 4-column grid and 1000x563 original frame sizes based on the build script
+        const COLUMNS = 4;
+        const SOURCE_WIDTH = 1000;
+        const SOURCE_HEIGHT = 563;
+
+        const col = localIndex % COLUMNS;
+        const row = Math.floor(localIndex / COLUMNS);
+        const sourceX = col * SOURCE_WIDTH;
+        const sourceY = row * SOURCE_HEIGHT;
 
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
@@ -110,15 +97,13 @@ export function ScrollSequence({
         // Clear previous frame
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // We specifically avoid setting imageSmoothingQuality="high" because running aggressive 
-        // bilinear filtering 192 times on huge decoded PNG memory buffers causes Safari GPU lag.
-
         // Draw background fallback if needed
         ctx.fillStyle = fallbackColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Calculate aspect ratio preserving dimensions showing full image (cover)
-        const imgRatio = img.width / img.height;
+        // We use the SOURCE clip dimensions rather than the massive sprite dimensions
+        const imgRatio = SOURCE_WIDTH / SOURCE_HEIGHT;
         const canvasRatio = canvas.width / canvas.height;
 
         let drawWidth = canvas.width;
@@ -138,8 +123,12 @@ export function ScrollSequence({
             offsetX = (canvas.width - drawWidth) / 2;
         }
 
-        // Draw the image onto the canvas, rounding coordinates to prevent sub-pixel blur
-        ctx.drawImage(img, Math.round(offsetX), Math.round(offsetY), Math.round(drawWidth), Math.round(drawHeight));
+        // Draw the specific cropped frame from the sprite sheet onto the canvas
+        ctx.drawImage(
+            sprite,
+            sourceX, sourceY, SOURCE_WIDTH, SOURCE_HEIGHT,
+            Math.round(offsetX), Math.round(offsetY), Math.round(drawWidth), Math.round(drawHeight)
+        );
     };
 
     // Initial and progressive render when images finish loading in the background

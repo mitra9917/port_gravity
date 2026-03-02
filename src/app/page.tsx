@@ -13,10 +13,7 @@ export default function Home() {
       <section className="relative w-full bg-black z-0">
         <ScrollSequence
           frameCount={192}
-          folderPath="/assets/hero-sequence/keyboard sequence"
-          prefix=""
-          indexPadding={5}
-          extension="png"
+          folderPath="/assets"
           playOnce={false}
         />
 
