@@ -66,14 +66,25 @@ export function ScrollSequence({
         // Ensure index is within bounds and rounded safely
         const safeIndex = Math.min(Math.max(0, Math.round(index)), frameCount - 1);
 
-        // Find the absolute closest loaded frame searching backwards to prevent blank drops
-        // if the user scrolls faster than the background network chunk buffer can load them.
-        let exactIndex = safeIndex;
-        let img = images[exactIndex];
+        // Find the absolute closest loaded frame to prevent blank drops
+        // on slow networks where the backfill pass hasn't completed yet.
+        let img = images[safeIndex];
 
-        while (!img && exactIndex > 0) {
-            exactIndex--;
-            img = images[exactIndex];
+        if (!img) {
+            // We search up to 12 frames away (because our keyframe distance is 8)
+            // This guarantees an image will ALWAYS be found, even on a completely throttled network.
+            for (let offset = 1; offset <= 12; offset++) {
+                // Check backwards first (previous state is usually more natural than future state during a forward scroll)
+                if (safeIndex - offset >= 0 && images[safeIndex - offset]) {
+                    img = images[safeIndex - offset];
+                    break;
+                }
+                // Check forwards
+                if (safeIndex + offset < frameCount && images[safeIndex + offset]) {
+                    img = images[safeIndex + offset];
+                    break;
+                }
+            }
         }
 
         if (!img) return;
