@@ -65,7 +65,17 @@ export function ScrollSequence({
 
         // Ensure index is within bounds and rounded safely
         const safeIndex = Math.min(Math.max(0, Math.round(index)), frameCount - 1);
-        const img = images[safeIndex];
+
+        // Find the absolute closest loaded frame searching backwards to prevent blank drops
+        // if the user scrolls faster than the background network chunk buffer can load them.
+        let exactIndex = safeIndex;
+        let img = images[exactIndex];
+
+        while (!img && exactIndex > 0) {
+            exactIndex--;
+            img = images[exactIndex];
+        }
+
         if (!img) return;
 
         const canvas = canvasRef.current;
@@ -89,9 +99,8 @@ export function ScrollSequence({
         // Clear previous frame
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Force maximum detail for high quality JPEGs
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = "high";
+        // We specifically avoid setting imageSmoothingQuality="high" because running aggressive 
+        // bilinear filtering 192 times on huge decoded PNG memory buffers causes Safari GPU lag.
 
         // Draw background fallback if needed
         ctx.fillStyle = fallbackColor;
@@ -122,14 +131,13 @@ export function ScrollSequence({
         ctx.drawImage(img, Math.round(offsetX), Math.round(offsetY), Math.round(drawWidth), Math.round(drawHeight));
     };
 
-    // Initial render when images finish loading
+    // Initial and progressive render when images finish loading in the background
     useEffect(() => {
-        if (loaded && images.length > 0) {
-            // Small timeout ensures canvas has a layout before drawing
+        if (loaded) {
             requestAnimationFrame(() => renderFrame(currentFrameIndex.get()));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loaded, images]);
+    }, [loaded, progress]);
 
     // Update canvas when scroll position changes
     useMotionValueEvent(currentFrameIndex, "change", (latest) => {

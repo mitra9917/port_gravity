@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface UseImageSequenceProps {
     frameCount: number;
@@ -15,66 +15,70 @@ export function useImageSequence({
     extension = "webp",
     indexPadding = 4,
 }: UseImageSequenceProps) {
-    const [images, setImages] = useState<HTMLImageElement[]>([]);
+    const imagesRef = useRef<HTMLImageElement[]>([]);
     const [loaded, setLoaded] = useState(false);
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         let isMounted = true;
         let loadedCount = 0;
-        const loadedImages: HTMLImageElement[] = new Array(frameCount);
 
-        const loadImage = (index: number): Promise<HTMLImageElement> => {
-            return new Promise((resolve) => {
-                const img = new Image();
-                const paddedIndex = (index + 1).toString().padStart(indexPadding, "0");
-                img.src = `${folderPath}/${prefix}${paddedIndex}.${extension}`;
+        // Initialize or clear the tracking buffer
+        imagesRef.current = new Array(frameCount);
 
-                // Use fetchpriority for modern browsers to deprioritize later frames
-                if (index > 10 && 'fetchPriority' in img) {
-                    (img as HTMLImageElement & { fetchPriority?: string }).fetchPriority = "low";
-                }
+        const loadImage = (index: number) => {
+            const img = new Image();
+            const paddedIndex = (index + 1).toString().padStart(indexPadding, "0");
+            img.src = `${folderPath}/${prefix}${paddedIndex}.${extension}`;
 
-                img.onload = () => {
-                    loadedCount++;
-                    loadedImages[index] = img;
-                    if (isMounted) {
-                        setProgress(Math.round((loadedCount / frameCount) * 100));
-                    }
-                    resolve(img);
-                };
-
-                img.onerror = () => {
-                    console.warn(`Failed to load image: ${img.src}, using empty fallback.`);
-                    resolve(new Image());
-                };
-            });
-        };
-
-        const loadAllImages = async () => {
-            const promises = [];
-            for (let i = 0; i < frameCount; i++) {
-                promises.push(loadImage(i));
+            // Heavily deprioritize loading for off-screen end frames to unlock network threads
+            if (index > 25 && 'fetchPriority' in img) {
+                (img as HTMLImageElement & { fetchPriority?: string }).fetchPriority = "low";
             }
 
-            await Promise.all(promises);
+            img.onload = () => {
+                if (!isMounted) return;
+                loadedCount++;
+                imagesRef.current[index] = img;
 
-            if (isMounted) {
-                setImages([...loadedImages]);
-                setLoaded(true); // Only signal ready when EVERY image is buffered in memory
+                setProgress(Math.round((loadedCount / frameCount) * 100));
+
+                // Instantly unlock the UI loader so user can start scrolling once the top buffer is filled!
+                if (loadedCount >= Math.min(10, frameCount) && !loaded) {
+                    setLoaded(true);
+                }
+            };
+
+            img.onerror = () => {
+                if (!isMounted) return;
+                console.warn(`Failed to load frame: ${img.src}`);
+                loadedCount++;
+                if (loadedCount >= Math.min(10, frameCount) && !loaded) {
+                    setLoaded(true);
+                }
+            };
+        };
+
+        const loadAllAsyncQueue = async () => {
+            for (let i = 0; i < frameCount; i++) {
+                if (!isMounted) break;
+                loadImage(i);
+
+                // Yield to main thread every 4 requests to completely prevent browser freezes
+                if (i % 4 === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 0));
+                }
             }
         };
 
         if (frameCount > 0) {
-            loadAllImages();
+            loadAllAsyncQueue();
         }
 
         return () => {
             isMounted = false;
-            // Note: Full memory collection of 190 Image objects will happen
-            // when the component unmounts and references are dropped automatically.
         };
-    }, [frameCount, folderPath, prefix, extension, indexPadding]);
+    }, [frameCount, folderPath, prefix, extension, indexPadding]); // We deliberately removed `loaded` from deps
 
-    return { images, loaded, progress };
+    return { images: imagesRef.current, loaded, progress };
 }
