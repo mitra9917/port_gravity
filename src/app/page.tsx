@@ -34,9 +34,9 @@ export default function Home() {
           className="max-w-4xl mx-auto space-y-8"
         >
           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-foreground leading-[1.1]">
-            Where Code Meets<br />
+            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">
-              Interaction
+              Shubham
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-foreground/50 text-balance max-w-2xl mx-auto font-light">
