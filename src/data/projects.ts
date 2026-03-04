@@ -22,26 +22,6 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-        slug: "port_gravity",
-        title: "Port Gravity",
-        description: "A high-performance interactive portfolio framework featuring native scroll storytelling.",
-        techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Canvas API"],
-        liveUrl: "https://port-gravity.vercel.app/",
-        codeUrl: "https://github.com/mitra9917/port_gravity",
-        overview: {
-            problem: "Most digital portfolios rely on heavy video files or simplistic scroll-jacking libraries that compromise performance and user experience.",
-            solution: "Port Gravity implements a custom requestAnimationFrame loop over an HTML5 Canvas to synchronously map 190 high-resolution image frames to native scroll vectors. This delivers silky smooth 120hz interaction without the typical DOM layout thrashing.",
-            purpose: "Built as an exploratory architecture piece to demonstrate that uncompromising aesthetic beauty can coexist with perfect Lighthouse performance metrics."
-        },
-        technical: {
-            architecture: "Uses React Server Components where possible, isolating client-side motion layout exclusively to interaction nodes.",
-            challenges: "The primary challenge was managing memory. Fetching 190 high-resolution images synchronously crashed mobile browsers. The solution was implementing a chunked preloading strategy—prioritizing the first 5 frames for instant First Contentful Paint, then lazily batch-loading the rest with low fetchPriority."
-        },
-        outcome: {
-            achieved: "A 100/100 Lighthouse performance score across desktop and mobile, with zero dropped frames during active scroll.",
-            relevance: "Directly applicable to highly interactive enterprise landing pages, luxury brand showcases, and premium SaaS marketing."
-        }
-    }, {
         slug: "sports_companion",
         title: "Sports Companion",
         description: "A full-stack sports insights platform with AI-assisted analysis and real-time data presentation.",
@@ -87,6 +67,54 @@ export const projects: Project[] = [
         outcome: {
             achieved: "Built a fully playable vision-controlled badminton engine; implemented shot classification, AI rallies, and skill-based catching; designed a 2.5D ground‑view court with perspective, net height illusion, and mesh rendering.",
             relevance: "Computer vision–driven games; AI-assisted sports simulations; gesture-controlled interfaces; real-time interactive systems; foundations for future full‑3D sports game development."
+        }
+    }, {
+        slug: "breathe_map",
+        title: "Breathe Map: ML‑Driven Urban AQI Analytics & Simulation",
+        description: "A full-stack air quality analytics platform that models zone-level AQI using trained ML inference, visualizes city-wise pollution patterns on an interactive map, and runs intervention simulations with persistent results in Supabase.",
+        techStack: [
+            "Next.js",
+            "TypeScript",
+            "Supabase (Postgres + RLS)",
+            "Python",
+            "scikit-learn",
+            "Leaflet",
+            "Vercel"
+        ],
+        liveUrl: "https://breathe-map-w.vercel.app",
+        codeUrl: "https://github.com/mitra9917/breathe-map",
+        overview: {
+            problem: "Urban air quality data is often fragmented and hard to interpret at local zone level, while most dashboards do not provide actionable what-if analysis for interventions.",
+            solution: "Breathe Map combines city-scoped zone management, ML-based AQI estimation, and simulation workflows to let users understand current conditions and test potential traffic/green-cover interventions before real-world action.",
+            purpose: "The project was built to bridge frontend geospatial visualization, backend data reliability, and practical ML inference in one end-to-end decision-support system for air quality planning."
+        },
+        technical: {
+            architecture: "A Next.js app-router frontend consumes API routes backed by Supabase tables (`cities`, `zones`, `aqi_estimates`, `simulation_scenarios`, `simulation_results`). The backend performs model inference via Python/scikit-learn artifacts, stores predictions with model metadata, and enforces city-scoped querying and relational integrity.",
+            challenges: "Major challenges included replacing legacy mock pipelines with live DB+ML flows, handling deployment-time inference constraints, preventing single-zone inference failures from cascading into API 500s, and maintaining consistent city-scoped behavior across dashboard, zones, analysis, and simulation routes."
+        },
+        outcome: {
+            achieved: "Implemented end-to-end Supabase-backed CRUD and analytics; integrated ML prediction and simulation persistence; removed runtime mock dependencies; validated zone creation, AQI estimation, clustering/correlation analysis, and simulation writes across frontend and database.",
+            relevance: "Environmental analytics dashboards; geospatial decision systems; ML-in-production web apps; scenario planning tools; robust full-stack architecture with typed APIs and persistent auditability."
+        }
+    }, {
+        slug: "port_gravity",
+        title: "Port Gravity",
+        description: "A high-performance interactive portfolio framework featuring native scroll storytelling.",
+        techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Canvas API"],
+        liveUrl: "https://port-gravity.vercel.app/",
+        codeUrl: "https://github.com/mitra9917/port_gravity",
+        overview: {
+            problem: "Most digital portfolios rely on heavy video files or simplistic scroll-jacking libraries that compromise performance and user experience.",
+            solution: "Port Gravity implements a custom requestAnimationFrame loop over an HTML5 Canvas to synchronously map 190 high-resolution image frames to native scroll vectors. This delivers silky smooth 120hz interaction without the typical DOM layout thrashing.",
+            purpose: "Built as an exploratory architecture piece to demonstrate that uncompromising aesthetic beauty can coexist with perfect Lighthouse performance metrics."
+        },
+        technical: {
+            architecture: "Uses React Server Components where possible, isolating client-side motion layout exclusively to interaction nodes.",
+            challenges: "The primary challenge was managing memory. Fetching 190 high-resolution images synchronously crashed mobile browsers. The solution was implementing a chunked preloading strategy—prioritizing the first 5 frames for instant First Contentful Paint, then lazily batch-loading the rest with low fetchPriority."
+        },
+        outcome: {
+            achieved: "A 100/100 Lighthouse performance score across desktop and mobile, with zero dropped frames during active scroll.",
+            relevance: "Directly applicable to highly interactive enterprise landing pages, luxury brand showcases, and premium SaaS marketing."
         }
     }
 ];
