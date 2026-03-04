@@ -95,7 +95,7 @@ export default function Contact() {
                             <div className="group flex flex-col">
                                 <span className="text-sm font-medium text-white/40 mb-2 uppercase tracking-widest">Email</span>
                                 <a
-                                    href="mailto:hello@johndoe.com"
+                                    href="mailto:work.shubham.dev@gmail.com"
                                     className="text-2xl md:text-3xl font-light hover:text-white/80 transition-colors inline-flex items-center gap-4"
                                 >
                                     work.shubham.dev@gmail.com
