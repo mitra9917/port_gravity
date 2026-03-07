@@ -3,7 +3,10 @@ import localFont from "next/font/local";
 import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import { PageTransition } from "@/components/animation/PageTransition";
-import "./globals.css"; const geistSans = localFont({
+import { ThemeProvider } from "@/components/ThemeProvider";
+import "./globals.css";
+
+const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
@@ -29,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <ThemeProvider />
         <Navbar />
         <main className="flex-grow flex flex-col relative w-full pt-20">
           <PageTransition>

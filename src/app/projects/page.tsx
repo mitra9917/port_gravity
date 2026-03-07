@@ -4,6 +4,7 @@ import { motion, Variants } from "framer-motion";
 import { projects } from "@/data/projects";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { HorizontalScroll } from "@/components/animation/HorizontalScroll";
 
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -43,19 +44,18 @@ export default function ProjectsPage() {
                 </motion.div>
 
                 {/* Projects List */}
-                <motion.div
-                    variants={staggerContainer}
-                    initial="hidden"
-                    animate="visible"
-                    className="flex flex-col gap-8"
-                >
-                    {projects.map((project) => (
+                <HorizontalScroll>
+                    {projects.map((project, index) => (
                         <motion.div
                             key={project.slug}
-                            variants={fadeUp}
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            className="w-[85vw] md:w-[60vw] lg:w-[45vw] flex-shrink-0"
                         >
-                            <Link href={`/projects/${project.slug}`} className="group block">
-                                <article className="relative bg-white/[0.02] border border-white/5 p-8 md:p-12 rounded-3xl overflow-hidden hover:bg-white/[0.04] transition-colors duration-500">
+                            <Link href={`/projects/${project.slug}`} className="group block h-full">
+                                <article className="relative h-full bg-white/[0.02] border border-white/5 p-8 md:p-12 rounded-3xl overflow-hidden hover:bg-white/[0.04] transition-colors duration-500">
                                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
                                         <div className="space-y-4 max-w-2xl">
                                             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white group-hover:text-white/90 transition-colors">
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
                             </Link>
                         </motion.div>
                     ))}
-                </motion.div>
+                </HorizontalScroll>
             </div>
         </div>
     );

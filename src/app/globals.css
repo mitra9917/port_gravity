@@ -2,22 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 240 2% 4%;
+    /* Near black with a tiny cool tint */
+    --foreground: 0 0% 98%;
+    --glow1: 240 2% 6%;
+    /* Extremely faint baseline glow */
+    --glow2: 240 2% 5%;
+  }
+
+  /* Premium Morning: Extremely subtle cool dawn gray */
+  .theme-morning {
+    --background: 220 5% 5%;
+    --foreground: 210 10% 95%;
+    --glow1: 215 15% 9%;
+    /* Barely perceptive cool blue/gray */
+    --glow2: 240 10% 6%;
+  }
+
+  /* Premium Afternoon: Clean, stark monotonic neutral */
+  .theme-afternoon {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 98%;
+    --glow1: 40 10% 8%;
+    /* Very faint warm grey */
+    --glow2: 200 5% 6%;
+  }
+
+  /* Premium Golden Hour: Deep obsidian with the faintest copper hint */
+  .theme-golden-hour {
+    --background: 20 8% 4%;
+    --foreground: 30 10% 95%;
+    --glow1: 20 20% 8%;
+    /* Ultra subtle warm copper */
+    --glow2: 10 15% 6%;
+  }
+
+  /* Premium Night: Black out monotonic */
+  .theme-night {
+    --background: 0 0% 2%;
+    /* Almost pitch black */
+    --foreground: 0 0% 98%;
+    --glow1: 240 10% 6%;
+    /* Deep empty space */
+    --glow2: 220 10% 4%;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  background-image:
+    radial-gradient(ellipse at 85% 5%, hsl(var(--glow1) / 0.8), transparent 50%),
+    radial-gradient(ellipse at 15% 95%, hsl(var(--glow2) / 0.8), transparent 50%);
+  background-attachment: fixed;
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 2.5s ease-in-out, color 2.5s ease-in-out;
 }
 
 @layer utilities {

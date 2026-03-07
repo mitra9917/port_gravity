@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ScrollSequence } from "@/components/animation/ScrollSequence";
+import { TextMask } from "@/components/animation/TextMask";
+import { Scroll3DViewer } from "@/components/animation/Scroll3DViewer";
 import { ArrowRight } from "lucide-react";
 
 
@@ -59,6 +61,12 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Text Mask Transition Section */}
+      <TextMask text="DISCOVER" />
+
+      {/* 3D WebGL Scroll Scrubber */}
+      <Scroll3DViewer />
 
       {/* Additional spacing to enjoy the footer and bottom flow */}
       <section className="min-h-[50vh] w-full bg-background flex items-center justify-center pb-32">
