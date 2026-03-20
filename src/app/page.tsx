@@ -53,7 +53,7 @@ export default function Home() {
             className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-16"
           >
             <button className="flex items-center justify-center gap-3 group w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-medium tracking-wide hover:scale-105 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-              <a href="/port_gravity_CV.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/my_resume.pdf" target="_blank" rel="noopener noreferrer">
                 <span>Explore my CV</span>
               </a>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-500" />
