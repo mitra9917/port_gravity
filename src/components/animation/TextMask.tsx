@@ -59,7 +59,7 @@ export function TextMask({ text, backgroundContent }: TextMaskProps) {
                 <div className="absolute inset-0 z-0 flex items-center justify-center opacity-100">
                     {backgroundContent || (
                         // A highly vibrant, premium Apple-like gradient perfectly contrasting monotonic black
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#4158D0] via-[#C850C0] to-[#FFCC70]" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-350" />
                     )}
                 </div>
 
