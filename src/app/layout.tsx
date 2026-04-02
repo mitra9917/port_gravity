@@ -4,6 +4,7 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import { PageTransition } from "@/components/animation/PageTransition";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -40,6 +41,7 @@ export default function RootLayout({
           </PageTransition>
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
