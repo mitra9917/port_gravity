@@ -111,16 +111,35 @@ export function ScrollSequence({
         let offsetX = 0;
         let offsetY = 0;
 
-        if (canvasRatio > imgRatio) {
-            // Canvas is wider than image (relative) - crop top/bottom
-            drawWidth = canvas.width;
-            drawHeight = canvas.width / imgRatio;
-            offsetY = (canvas.height - drawHeight) / 2;
+        // Opt target mobile width: use 'contain' behavior to avoid cropping.
+        const isMobile = window.innerWidth < 768;
+
+        if (isMobile) {
+            // CONTAIN logic (fits the whole image within the canvas without cropping sides)
+            if (canvasRatio > imgRatio) {
+                // Canvas is wider than image
+                drawHeight = canvas.height;
+                drawWidth = canvas.height * imgRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
+            } else {
+                // Canvas is taller than image (typical mobile)
+                drawWidth = canvas.width;
+                drawHeight = canvas.width / imgRatio;
+                offsetY = (canvas.height - drawHeight) / 2;
+            }
         } else {
-            // Canvas is taller than image (relative) - crop sides
-            drawHeight = canvas.height;
-            drawWidth = canvas.height * imgRatio;
-            offsetX = (canvas.width - drawWidth) / 2;
+            // COVER logic (laptop/desktop behavior - fills whole canvas, crops overflow)
+            if (canvasRatio > imgRatio) {
+                // Canvas is wider than image (relative) - crop top/bottom
+                drawWidth = canvas.width;
+                drawHeight = canvas.width / imgRatio;
+                offsetY = (canvas.height - drawHeight) / 2;
+            } else {
+                // Canvas is taller than image (relative) - crop sides
+                drawHeight = canvas.height;
+                drawWidth = canvas.height * imgRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
+            }
         }
 
         // Draw the specific cropped frame from the sprite sheet onto the canvas

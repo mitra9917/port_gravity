@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useScroll, useTransform, useSpring } from 'framer-motion';
 import * as THREE from 'three';
@@ -19,26 +19,38 @@ function ScrollGeometry() {
         mass: 1
     });
 
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     // Interpolate scroll progress into dynamic rotation and scaling
     const rotationX = useTransform(smoothProgress, [0, 1], [0, Math.PI * 4]);
     const rotationY = useTransform(smoothProgress, [0, 1], [0, Math.PI * 8]);
-    const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.8, 1.8, 0.8]);
+
+    const baseScale = isMobile ? 0.6 : 0.8;
+    const peakScale = isMobile ? 1.2 : 1.8;
+    const scale = useTransform(smoothProgress, [0, 0.5, 1], [baseScale, peakScale, baseScale]);
 
     // Outer ring rotation
     const outerRotationZ = useTransform(smoothProgress, [0, 1], [0, -Math.PI * 4]);
 
     useFrame(() => {
+        const s = scale.get();
+
         if (meshRef.current) {
             meshRef.current.rotation.x = rotationX.get();
             meshRef.current.rotation.y = rotationY.get();
-
-            const s = scale.get();
             meshRef.current.scale.set(s, s, s);
         }
 
         if (meshRefOuter.current) {
             meshRefOuter.current.rotation.x = rotationY.get() * 0.5;
             meshRefOuter.current.rotation.z = outerRotationZ.get();
+            meshRefOuter.current.scale.set(s, s, s);
         }
     });
 

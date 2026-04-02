@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, ReactNode } from 'react';
+import { useRef, ReactNode, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface TextMaskProps {
@@ -10,6 +10,15 @@ interface TextMaskProps {
 
 export function TextMask({ text, backgroundContent }: TextMaskProps) {
     const container = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     const { scrollYProgress } = useScroll({
         target: container,
         offset: ['start start', 'end end']
@@ -41,7 +50,7 @@ export function TextMask({ text, backgroundContent }: TextMaskProps) {
                                     y="50%"
                                     textAnchor="middle"
                                     dominantBaseline="middle"
-                                    fontSize="95"
+                                    fontSize={isMobile ? "23" : "95"}
                                     fontWeight="900"
                                     letterSpacing="0.05em"
                                     fill="black"
