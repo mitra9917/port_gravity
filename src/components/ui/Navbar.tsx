@@ -29,15 +29,16 @@ export function Navbar() {
     }, []);
 
     return (
-        <header
-            className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4",
-                isScrolled
-                    ? "bg-background/70 backdrop-blur-md border-b border-white/10 py-3 shadow-lg"
-                    : "bg-transparent"
-            )}
-        >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <>
+            <header
+                className={cn(
+                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4",
+                    isScrolled
+                        ? "bg-background/70 backdrop-blur-md border-b border-white/10 py-3 shadow-lg"
+                        : "bg-transparent"
+                )}
+            >
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
                 <div className="flex items-center justify-between">
                     <Link
                         href="/"
@@ -77,6 +78,8 @@ export function Navbar() {
                 </div>
             </div>
 
+            </header>
+
             {/* Mobile Menu Overlay */}
             <div
                 className={cn(
@@ -99,6 +102,6 @@ export function Navbar() {
                     </Link>
                 ))}
             </div>
-        </header>
+        </>
     );
 }
