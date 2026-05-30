@@ -91,10 +91,17 @@ const toolkitCards: {
 const experienceItems = [
     {
         title: "Technology Executive Intern",
-        meta: "Seatrick Innovations Pvt Ltd • Singapore-based maritime tech • May 2026 - Jul 2026",
+        meta: "Seatrick Innovations Pvt Ltd, Singapore • Maritime Technology • May 2026 - Jul 2026",
         description:
-            "Supporting testing, analysis, technical coordination, documentation, and project execution for digital initiatives serving the maritime technology ecosystem.",
-        tags: ["Maritime Tech", "Testing", "Analysis"],
+            "Supporting testing, analysis, technical coordination, and project execution for digital initiatives serving the maritime technology ecosystem.",
+        tags: ["Singapore-based", "Maritime Tech", "project execution"],
+    },
+    {
+        title: "Summer Research Intern",
+        meta: "Vellore Institute of Technology • Summer Research Internship • 2026",
+        description:
+            "Engaged in research-oriented technical work involving literature study, experimentation, analysis, and documentation while strengthening problem-solving through an academic research workflow.",
+        tags: ["Research", "Analysis", "Documentation"],
     },
     {
         title: "Frontend Web Developer",
