@@ -54,11 +54,11 @@ export default function ProjectsPage() {
                             transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             className="w-[85vw] md:w-[60vw] lg:w-[45vw] flex-shrink-0"
                         >
-                            <Link href={`/projects/${project.slug}`} className="group block h-full">
-                                <article className="relative h-full bg-white/[0.02] border border-white/5 p-8 md:p-12 rounded-3xl overflow-hidden hover:bg-white/[0.04] transition-colors duration-500">
+                            <Link href={`/projects/${project.slug}`} className="block h-full">
+                                <article className="group relative h-full bg-white/[0.02] border border-white/5 p-8 md:p-12 rounded-3xl overflow-hidden hover:bg-white/[0.04] transition-colors duration-500">
                                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
                                         <div className="space-y-4 max-w-2xl">
-                                            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white group-hover:text-white/90 transition-colors">
+                                            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white group-hover:text-[#00FFFF] transition-colors">
                                                 {project.title}
                                             </h2>
                                             <p className="text-lg text-white/50 leading-relaxed font-light line-clamp-2">

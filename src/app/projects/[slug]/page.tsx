@@ -94,20 +94,20 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                         <h2 className="text-sm font-medium text-white/40 uppercase tracking-widest sticky top-32">Overview</h2>
                     </motion.div>
                     <motion.div variants={fadeUp} className="space-y-12">
-                        <div className="space-y-4">
-                            <h3 className="text-2xl font-semibold flex items-center gap-3">
+                        <div className="group space-y-4">
+                            <h3 className="text-2xl font-semibold flex items-center gap-3 group-hover:text-[#00FFFF] transition-colors">
                                 <Layout className="w-5 h-5 text-white/50" /> The Problem
                             </h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.overview.problem}</p>
                         </div>
-                        <div className="space-y-4">
-                            <h3 className="text-2xl font-semibold flex items-center gap-3">
+                        <div className="group space-y-4">
+                            <h3 className="text-2xl font-semibold flex items-center gap-3 group-hover:text-[#00FFFF] transition-colors">
                                 <Zap className="w-5 h-5 text-white/50" /> The Solution
                             </h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.overview.solution}</p>
                         </div>
-                        <div className="space-y-4">
-                            <h3 className="text-2xl font-semibold flex items-center gap-3">
+                        <div className="group space-y-4">
+                            <h3 className="text-2xl font-semibold flex items-center gap-3 group-hover:text-[#00FFFF] transition-colors">
                                 <ExternalLink className="w-5 h-5 text-white/50" /> The Purpose
                             </h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.overview.purpose}</p>
@@ -127,14 +127,14 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                         <h2 className="text-sm font-medium text-white/40 uppercase tracking-widest sticky top-32">Technical</h2>
                     </motion.div>
                     <motion.div variants={fadeUp} className="space-y-12 bg-white/[0.02] border border-white/5 p-8 md:p-12 rounded-3xl">
-                        <div className="space-y-4">
-                            <h3 className="text-2xl font-semibold flex items-center gap-3">
+                        <div className="group space-y-4">
+                            <h3 className="text-2xl font-semibold flex items-center gap-3 group-hover:text-[#00FFFF] transition-colors">
                                 <Database className="w-5 h-5 text-white/50" /> Architecture
                             </h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.technical.architecture}</p>
                         </div>
-                        <div className="space-y-4">
-                            <h3 className="text-2xl font-semibold flex items-center gap-3">
+                        <div className="group space-y-4">
+                            <h3 className="text-2xl font-semibold flex items-center gap-3 group-hover:text-[#00FFFF] transition-colors">
                                 <Code2 className="w-5 h-5 text-white/50" /> Decisions & Challenges
                             </h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.technical.challenges}</p>
@@ -154,14 +154,14 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                         <h2 className="text-sm font-medium text-white/40 uppercase tracking-widest sticky top-32">Impact</h2>
                     </motion.div>
                     <motion.div variants={fadeUp} className="space-y-12">
-                        <div className="space-y-4 border-l border-white/10 pl-8 relative">
+                        <div className="group space-y-4 border-l border-white/10 pl-8 relative">
                             <div className="absolute w-2 h-2 rounded-full bg-white/50 -left-[4px] top-2" />
-                            <h3 className="text-2xl font-semibold">Outcome Achieved</h3>
+                            <h3 className="text-2xl font-semibold group-hover:text-[#00FFFF] transition-colors">Outcome Achieved</h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.outcome.achieved}</p>
                         </div>
-                        <div className="space-y-4 border-l border-white/10 pl-8 relative">
+                        <div className="group space-y-4 border-l border-white/10 pl-8 relative">
                             <div className="absolute w-2 h-2 rounded-full bg-white/20 -left-[4px] top-2" />
-                            <h3 className="text-2xl font-semibold">Real World Relevance</h3>
+                            <h3 className="text-2xl font-semibold group-hover:text-[#00FFFF] transition-colors">Real World Relevance</h3>
                             <p className="text-lg text-white/70 leading-relaxed font-light">{projectData.outcome.relevance}</p>
                         </div>
                     </motion.div>
