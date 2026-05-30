@@ -68,8 +68,8 @@ export default function Home() {
       {/* 3D WebGL Scroll Scrubber */}
       <Scroll3DViewer />
 
-      {/* Additional spacing to enjoy the footer and bottom flow */}
-      <section className="min-h-[50vh] w-full bg-background flex items-center justify-center pb-32">
+      {/* Final cards section with breathing room after the sticky WebGL scene */}
+      <section className="min-h-screen w-full bg-background flex items-center justify-center pt-[35vh] pb-40">
         <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white/40">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
