@@ -76,9 +76,9 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-white/[0.02] transition-colors duration-500"
+            className="group p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/40 transition-colors duration-500"
           >
-            <h3 className="text-white/80 font-medium mb-4 text-lg">Systems Thinking</h3>
+            <h3 className="text-white/80 group-hover:text-[#00FFFF] font-medium mb-4 text-lg transition-colors duration-500">Systems Thinking</h3>
             <p className="text-sm leading-relaxed">Approaching projects by thinking about how different parts of an application
               work together, from user interface to basic backend logic.</p>
           </motion.div>
@@ -87,9 +87,9 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-white/[0.02] transition-colors duration-500"
+            className="group p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/40 transition-colors duration-500"
           >
-            <h3 className="text-white/80 font-medium mb-4 text-lg">Full-Stack Foundations</h3>
+            <h3 className="text-white/80 group-hover:text-[#00FFFF] font-medium mb-4 text-lg transition-colors duration-500">Full-Stack Foundations</h3>
             <p className="text-sm leading-relaxed">Building complete web applications by working across frontend features
               and foundational backend functionality.</p>
           </motion.div>
@@ -98,9 +98,9 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-white/[0.02] transition-colors duration-500"
+            className="group p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/40 transition-colors duration-500"
           >
-            <h3 className="text-white/80 font-medium mb-4 text-lg">Applied AI</h3>
+            <h3 className="text-white/80 group-hover:text-[#00FFFF] font-medium mb-4 text-lg transition-colors duration-500">Applied AI</h3>
             <p className="text-sm leading-relaxed">Exploring practical AI features such as intelligent automation,
               data-driven insights, and AI-assisted user workflows in real projects.</p>
           </motion.div>
