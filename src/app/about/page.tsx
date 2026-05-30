@@ -1,7 +1,19 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { GraduationCap, Code2, BookOpen, Coffee } from "lucide-react";
+import {
+    Bot,
+    Braces,
+    Code2,
+    Database,
+    GraduationCap,
+    Layers3,
+    Palette,
+    Radar,
+    Rocket,
+    Server,
+    type LucideIcon,
+} from "lucide-react";
 import { DistortedImage } from "@/components/animation/DistortedImage";
 
 const fadeIn: Variants = {
@@ -22,6 +34,58 @@ const staggerContainer: Variants = {
         }
     }
 };
+
+const toolkitCards: {
+    title: string;
+    subtitle: string;
+    icon: LucideIcon;
+}[] = [
+        {
+            title: "React & Next.js",
+            subtitle: "App Router, Server Components",
+            icon: Code2,
+        },
+        {
+            title: "TypeScript",
+            subtitle: "Typed, maintainable codebases",
+            icon: Braces,
+        },
+        {
+            title: "Tailwind & shadcn/ui",
+            subtitle: "Fast, consistent interfaces",
+            icon: Palette,
+        },
+        {
+            title: "Hugging Face",
+            subtitle: "Models, datasets, transformers",
+            icon: Bot,
+        },
+        {
+            title: "RAG & Agents",
+            subtitle: "LangChain, LlamaIndex patterns",
+            icon: Layers3,
+        },
+        {
+            title: "Vector Search",
+            subtitle: "Embeddings, pgvector, Chroma",
+            icon: Radar,
+        },
+        {
+            title: "AI Evaluation",
+            subtitle: "Prompt tests, quality checks",
+            icon: Server,
+        },
+        {
+            title: "Supabase & Postgres",
+            subtitle: "Auth, RLS, relational data",
+            icon: Database,
+        },
+        {
+            title: "Vercel",
+            subtitle: "Deployment, analytics, edge",
+            icon: Rocket,
+        },
+    ];
 
 export default function About() {
     return (
@@ -98,34 +162,41 @@ export default function About() {
                         </motion.div>
 
                         <div className="space-y-6 border-l border-white/10 pl-6 ml-3">
-                            <motion.div variants={fadeIn} className="relative">
+                            <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/40 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold">B.Tech. Computer Science</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">B.Tech. Computer Science</h4>
                                 <p className="text-white/50 text-sm mb-2">Vellore Institute of Technology • 2024 - 2028</p>
                                 <p className="text-white/70 text-sm">Currently pursuing a Bachelor’s degree in Computer Science,
                                     with coursework covering programming fundamentals, data structures,
                                     web development, and software engineering concepts.</p>
                             </motion.div>
 
-                            <motion.div variants={fadeIn} className="relative">
+                            <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold">Web Design Specialist Certification</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Web Design Specialist Certification</h4>
                                 <p className="text-white/50 text-sm mb-2">Figma • 2025</p>
                                 <p className="text-white/70 text-sm">Focused on clean UI, typography in digital spaces, and advanced prototyping.</p>
                             </motion.div>
 
-                            <motion.div variants={fadeIn} className="relative">
+                            <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold">Exploring Networking with Cisco Packet Tracer</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Exploring Networking with Cisco Packet Tracer</h4>
                                 <p className="text-white/50 text-sm mb-2">Cisco Networking Academy • 2025</p>
                                 <p className="text-white/70 text-sm">Built wired and wireless networks using Cisco Packet Tracer & Configured routers, switches, and wireless devices</p>
                             </motion.div>
 
-                            <motion.div variants={fadeIn} className="relative">
+                            <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold">Introduction to Agile Development and Scrum</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Introduction to Agile Development and Scrum</h4>
                                 <p className="text-white/50 text-sm mb-2">IBM • 2026</p>
                                 <p className="text-white/70 text-sm">Kanban board created as part of the Agile Scrum final project, demonstrating end-to-end workflow management using GitHub Projects. The board includes Icebox, Product Backlog and other Reiterative methodologies.</p>
+                            </motion.div>
+
+                            <motion.div variants={fadeIn} className="group relative">
+                                <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
+                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Supervised Machine Learning: Regression and Classification </h4>
+                                <p className="text-white/50 text-sm mb-2">DeepLearning.AI • 2026</p>
+                                <p className="text-white/70 text-sm">Completed DeepLearning.AI’s Supervised Machine Learning course, covering core regression and classification techniques used to build predictive models. Gained practical understanding of model training, cost functions, gradient descent, and evaluation for real-world machine learning problems.</p>
                             </motion.div>
                         </div>
                     </motion.div>
@@ -143,27 +214,19 @@ export default function About() {
                             <h3 className="text-2xl font-bold">Toolkit & Interests</h3>
                         </motion.div>
 
-                        <motion.div variants={fadeIn} className="grid grid-cols-2 gap-4">
-                            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col gap-2 hover:bg-white/[0.05] transition-colors">
-                                <BookOpen className="w-5 h-5 text-white/40" />
-                                <span className="font-medium">Whisk & Flow</span>
-                                <span className="text-xs text-white/50">Prompt Image Render</span>
-                            </div>
-                            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col gap-2 hover:bg-white/[0.05] transition-colors">
-                                <Coffee className="w-5 h-5 text-white/40" />
-                                <span className="font-medium">Creative Coding</span>
-                                <span className="text-xs text-white/50">Generative art algorithms</span>
-                            </div>
-                            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col gap-2 hover:bg-white/[0.05] transition-colors">
-                                <Code2 className="w-5 h-5 text-white/40" />
-                                <span className="font-medium">Modern React</span>
-                                <span className="text-xs text-white/50">Next.js 14, Server Components</span>
-                            </div>
-                            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col gap-2 hover:bg-white/[0.05] transition-colors">
-                                <GraduationCap className="w-5 h-5 text-white/40" />
-                                <span className="font-medium">Typography</span>
-                                <span className="text-xs text-white/50">Grid systems, micro-interactions</span>
-                            </div>
+                        <motion.div variants={fadeIn} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {toolkitCards.map(({ title, subtitle, icon: Icon }) => (
+                                <div
+                                    key={title}
+                                    className="group min-h-36 p-5 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col justify-between gap-4 hover:bg-white/[0.05] hover:border-[#00FFFF]/40 transition-colors"
+                                >
+                                    <Icon className="w-5 h-5 text-white/40" />
+                                    <div className="flex flex-col gap-2">
+                                        <span className="font-medium leading-tight group-hover:text-[#00FFFF] transition-colors">{title}</span>
+                                        <span className="text-xs leading-relaxed text-white/50">{subtitle}</span>
+                                    </div>
+                                </div>
+                            ))}
                         </motion.div>
                     </motion.div>
 

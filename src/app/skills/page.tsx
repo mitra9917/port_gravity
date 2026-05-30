@@ -115,9 +115,9 @@ export default function Skills() {
                                     <motion.li
                                         key={skill}
                                         variants={itemVariants}
-                                        className="flex items-center text-white/70 hover:text-white transition-colors py-1 group"
+                                        className="flex items-center text-white/70 hover:text-[#00FFFF] transition-colors py-1 group"
                                     >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-white/20 mr-4 group-hover:bg-white/80 transition-colors" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white/20 mr-4 group-hover:bg-[#00FFFF] transition-colors" />
                                         <span className="text-lg">{skill}</span>
                                     </motion.li>
                                 ))}

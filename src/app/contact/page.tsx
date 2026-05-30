@@ -96,7 +96,7 @@ export default function Contact() {
                                 <span className="text-sm font-medium text-white/40 mb-2 uppercase tracking-widest">Email</span>
                                 <a
                                     href="mailto:work.shubham.dev@gmail.com"
-                                    className="text-2xl md:text-3xl font-light hover:text-white/80 transition-colors inline-flex items-center gap-4"
+                                    className="text-2xl md:text-3xl font-light hover:text-[#00FFFF] transition-colors inline-flex items-center gap-4"
                                 >
                                     work.shubham.dev@gmail.com
                                     <ArrowRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
@@ -106,15 +106,15 @@ export default function Contact() {
                             <div className="group flex flex-col pt-6">
                                 <span className="text-sm font-medium text-white/40 mb-4 uppercase tracking-widest">Socials</span>
                                 <div className="flex gap-6">
-                                    <a href="https://github.com/mitra9917" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+                                    <a href="https://github.com/mitra9917" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-[#00FFFF] hover:scale-110 transition-all duration-300">
                                         <span className="sr-only">GitHub</span>
                                         <Github className="w-6 h-6" />
                                     </a>
-                                    <a href="https://x.com/mitra9917" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+                                    <a href="https://x.com/mitra9917" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-[#00FFFF] hover:scale-110 transition-all duration-300">
                                         <span className="sr-only">Twitter</span>
                                         <Twitter className="w-6 h-6" />
                                     </a>
-                                    <a href="https://www.linkedin.com/in/shubham-kumar-mitra-335626336/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+                                    <a href="https://www.linkedin.com/in/shubham-kumar-mitra-335626336/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-[#00FFFF] hover:scale-110 transition-all duration-300">
                                         <span className="sr-only">LinkedIn</span>
                                         <Linkedin className="w-6 h-6" />
                                     </a>
@@ -180,7 +180,7 @@ export default function Contact() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full relative flex items-center justify-center gap-2 bg-white text-black font-semibold rounded-xl py-4 mt-4 overflow-hidden group hover:scale-105 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:opacity-70 disabled:hover:scale-100"
+                                className="w-full relative flex items-center justify-center gap-2 bg-white text-black font-semibold rounded-xl py-4 mt-4 overflow-hidden group hover:text-[#00FFFF] hover:scale-105 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:opacity-70 disabled:hover:scale-100"
                             >
                                 {isSubmitting ? (
                                     <span className="flex flex-row items-center gap-2">

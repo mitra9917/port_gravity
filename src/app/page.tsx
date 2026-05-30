@@ -25,7 +25,7 @@ export default function Home() {
       </section>
 
       {/* Content that fades in AFTER animation ends */}
-      <section className="relative z-10 w-full bg-background rounded-t-[3rem] -mt-12 pt-32 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+      <section className="relative z-10 w-full bg-black rounded-t-[20rem] -mt-12 pt-32 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

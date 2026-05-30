@@ -61,6 +61,13 @@ body {
   transition: background-color 2.5s ease-in-out, color 2.5s ease-in-out;
 }
 
+@media (pointer: fine) {
+  .custom-cursor-enabled,
+  .custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
