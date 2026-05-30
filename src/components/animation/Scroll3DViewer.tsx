@@ -102,7 +102,7 @@ export function Scroll3DViewer() {
                         Interfaces to <br /> <span className="text-white/60">INTELLIGENT SYSTEMS</span>
                     </h2>
                     <p className="text-white/80 text-lg md:text-xl font-light max-w-xl mx-auto text-balance tracking-wide">
-                        Frontend-focused developer expanding into backend and AI.
+                        Web based developer expanding into AI & ML
                     </p>
                 </div>
             </div>
