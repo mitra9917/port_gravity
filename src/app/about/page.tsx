@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import {
     Bot,
+    Briefcase,
     Braces,
     Code2,
     Database,
@@ -87,6 +88,30 @@ const toolkitCards: {
         },
     ];
 
+const experienceItems = [
+    {
+        title: "Technology Executive Intern",
+        meta: "Seatrick Innovations Pvt Ltd • Singapore-based maritime tech • May 2026 - Jul 2026",
+        description:
+            "Supporting testing, analysis, technical coordination, documentation, and project execution for digital initiatives serving the maritime technology ecosystem.",
+        tags: ["Maritime Tech", "Testing", "Analysis"],
+    },
+    {
+        title: "Frontend Web Developer",
+        meta: "NEXUS VIT • Full-time • Aug 2025 - Present",
+        description:
+            "Working on Web development side for club projects, focusing on responsive interfaces, clean component structure, and user-facing web experiences.",
+        tags: ["Front-End", "React", "UI Development"],
+    },
+    {
+        title: "Design Department",
+        meta: "Microsoft Innovations Club VITC • Full-time • Aug 2025 - Present",
+        description:
+            "Contributing to design work for club initiatives, with attention to visual clarity, layout systems, and polished digital presentation.",
+        tags: ["Design", "Figma", "Visual Systems"],
+    },
+];
+
 export default function About() {
     return (
         <div className="flex flex-col w-full min-h-screen bg-black text-white pt-40 pb-32">
@@ -122,7 +147,7 @@ export default function About() {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                     variants={staggerContainer}
-                    className="max-w-3xl mb-32 space-y-8"
+                    className="max-w-3xl mb-24 space-y-8"
                 >
                     <motion.h2 variants={fadeIn} className="text-3xl font-bold tracking-tight mb-8">
                         My Story
@@ -144,6 +169,57 @@ export default function About() {
                         how thoughtful engineering choices shape reliable and scalable products.
                     </motion.p>
                 </motion.div>
+
+                {/* Experience Section */}
+                <motion.section
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={staggerContainer}
+                    className="grid grid-cols-1 md:grid-cols-[0.8fr_2fr] gap-8 md:gap-12 mb-28"
+                >
+                    <motion.div variants={fadeIn} className="flex items-center md:items-start gap-3">
+                        <Briefcase className="w-6 h-6 text-white/50 mt-1" />
+                        <div>
+                            <h2 className="text-3xl font-bold tracking-tight">Experience</h2>
+                            <p className="mt-3 text-sm leading-relaxed text-white/40">
+                                Project-based work across full-stack, AI, and interaction design.
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    <motion.div variants={staggerContainer} className="space-y-4">
+                        {experienceItems.map((item) => (
+                            <motion.article
+                                key={item.title}
+                                variants={fadeIn}
+                                className="group rounded-2xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-[#00FFFF]/30 transition-colors"
+                            >
+                                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                                    <div className="space-y-2">
+                                        <h3 className="text-xl font-semibold group-hover:text-[#00FFFF] transition-colors">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-sm text-white/45">{item.meta}</p>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2 md:justify-end">
+                                        {item.tags.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/50"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                <p className="mt-4 text-sm leading-relaxed text-white/65">
+                                    {item.description}
+                                </p>
+                            </motion.article>
+                        ))}
+                    </motion.div>
+                </motion.section>
 
                 {/* Details Grid: Education & Interests */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
