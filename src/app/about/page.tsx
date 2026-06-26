@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import {
     Bot,
     Briefcase,
-    Braces,
     Code2,
     Database,
     GraduationCap,
@@ -13,6 +12,8 @@ import {
     Radar,
     Rocket,
     Server,
+    Workflow,
+    Cloud,
     type LucideIcon,
 } from "lucide-react";
 import { DistortedImage } from "@/components/animation/DistortedImage";
@@ -47,9 +48,9 @@ const toolkitCards: {
             icon: Code2,
         },
         {
-            title: "TypeScript",
-            subtitle: "Typed, maintainable codebases",
-            icon: Braces,
+            title: "Render & Railways",
+            subtitle: "Cloud deploys and backend hosting",
+            icon: Cloud,
         },
         {
             title: "Tailwind & shadcn/ui",
@@ -85,6 +86,11 @@ const toolkitCards: {
             title: "Vercel",
             subtitle: "Deployment, analytics, edge",
             icon: Rocket,
+        },
+        {
+            title: "n8n & ngrok",
+            subtitle: "Workflow automation and local tunnels",
+            icon: Workflow,
         },
     ];
 

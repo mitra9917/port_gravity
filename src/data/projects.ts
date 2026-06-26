@@ -22,6 +22,36 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        slug: "averion_ai",
+        title: "Averion.ai",
+        description: "A secure RAG platform for uploading internal documents, searching organizational knowledge, and receiving grounded AI answers with source citations.",
+        techStack: [
+            "Next.js 16",
+            "React 19",
+            "TypeScript",
+            "FastAPI",
+            "Supabase",
+            "PostgreSQL pgvector",
+            "sentence-transformers",
+            "Groq/OpenAI"
+        ],
+        liveUrl: "https://averion-ai.vercel.app/",
+        codeUrl: "https://github.com/mitra9917/Averion.ai",
+        overview: {
+            problem: "Organizations often keep knowledge scattered across PDFs, handbooks, policy documents, and internal notes, making it hard for teams to find reliable answers quickly. Regular chatbots can also hallucinate or expose information without clear source grounding.",
+            solution: "Averion.ai provides a secure company knowledge assistant where users can upload documents, run semantic search, and ask questions through a RAG workflow that returns grounded responses with source citations and page-aware references.",
+            purpose: "The project was built to explore production-minded AI systems: document ingestion, vector retrieval, organization-level access control, citation enforcement, and feedback loops for improving answer quality."
+        },
+        technical: {
+            architecture: "A monorepo architecture with a Next.js frontend, FastAPI backend, Supabase Auth, Supabase PostgreSQL, and pgvector. Uploaded PDF, TXT, and DOCX files are processed, cleaned, chunked, embedded with sentence-transformers/all-MiniLM-L6-v2, and stored with metadata and vectors. User queries pass through prompt-injection checks, embedding generation, similarity-threshold retrieval, RAG prompt construction, LLM generation through Groq/OpenAI-compatible providers, output filtering, and citation mapping.",
+            challenges: "Key challenges included building a secure RAG flow instead of a generic chatbot, enforcing organization isolation for multi-tenant workspaces, blocking prompt-injection patterns, keeping answers grounded in retrieved context, managing document-processing jobs, and designing feedback export for future model evaluation."
+        },
+        outcome: {
+            achieved: "Implemented document upload and processing, semantic vector search, grounded chat with source citations, persistent conversation history, role-based organization workflows, security audit logging, answer feedback, and exportable feedback records for improvement.",
+            relevance: "Enterprise knowledge assistants; internal support tools; secure RAG platforms; document intelligence systems; AI products that require citations, access control, and retrieval-backed reliability."
+        }
+    },
+    {
         slug: "sports_companion",
         title: "Sports Companion",
         description: "A full-stack sports insights platform with AI-assisted analysis and real-time data presentation.",
