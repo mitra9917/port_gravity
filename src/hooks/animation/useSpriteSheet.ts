@@ -7,6 +7,7 @@ interface UseSpriteSheetsProps {
 
 export function useSpriteSheet({ folderPath, sheetCount }: UseSpriteSheetsProps) {
     const spritesRef = useRef<HTMLImageElement[]>([]);
+    const hasUnlockedRef = useRef(false);
     const [loaded, setLoaded] = useState(false);
     const [progress, setProgress] = useState(0);
 
@@ -35,7 +36,8 @@ export function useSpriteSheet({ folderPath, sheetCount }: UseSpriteSheetsProps)
                     setProgress(Math.round((loadedCount / sheetCount) * 100));
 
                     // Unlock the UI loader instantly when the first sheet (Frames 1-24) is buffered!
-                    if (index === 0 && !loaded) {
+                    if (index === 0 && !hasUnlockedRef.current) {
+                        hasUnlockedRef.current = true;
                         setLoaded(true);
                     }
                     resolve();

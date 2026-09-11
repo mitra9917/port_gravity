@@ -149,7 +149,7 @@ const FULL_TEXT = CODE_TOKENS.map((t) => t.text).join("");
 
 function sliceTokens(tokens: CodeToken[], charCount: number): CodeToken[] {
     let remaining = Math.max(0, charCount);
-    const out: Token[] = [];
+    const out: CodeToken[] = [];
 
     for (const token of tokens) {
         if (remaining <= 0) break;

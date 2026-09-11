@@ -16,6 +16,7 @@ export function useImageSequence({
     indexPadding = 4,
 }: UseImageSequenceProps) {
     const imagesRef = useRef<HTMLImageElement[]>([]);
+    const hasUnlockedRef = useRef(false);
     const [loaded, setLoaded] = useState(false);
     const [progress, setProgress] = useState(0);
 
@@ -47,7 +48,8 @@ export function useImageSequence({
                     setProgress(Math.round((loadedCount / frameCount) * 100));
 
                     // Instantly unlock the UI loader so user can start scrolling once the top buffer is filled!
-                    if (loadedCount >= Math.min(10, frameCount) && !loaded) {
+                    if (loadedCount >= Math.min(10, frameCount) && !hasUnlockedRef.current) {
+                        hasUnlockedRef.current = true;
                         setLoaded(true);
                     }
                     resolve();
@@ -57,7 +59,8 @@ export function useImageSequence({
                     if (!isMounted) return resolve();
                     console.warn(`Failed to load frame: ${img.src}`);
                     loadedCount++;
-                    if (loadedCount >= Math.min(10, frameCount) && !loaded) {
+                    if (loadedCount >= Math.min(10, frameCount) && !hasUnlockedRef.current) {
+                        hasUnlockedRef.current = true;
                         setLoaded(true);
                     }
                     resolve();
@@ -107,7 +110,7 @@ export function useImageSequence({
         return () => {
             isMounted = false;
         };
-    }, [frameCount, folderPath, prefix, extension, indexPadding]); // We deliberately removed `loaded` from deps
+    }, [frameCount, folderPath, prefix, extension, indexPadding]);
 
     return { images: imagesRef.current, loaded, progress };
 }

@@ -209,29 +209,27 @@ function Connection({
     appear: number;
     progressRef: React.MutableRefObject<number>;
 }) {
-    const lineRef = useRef<THREE.Line>(null);
-    const geometry = useMemo(() => {
+    const lineObject = useMemo(() => {
         const curve = new THREE.QuadraticBezierCurve3(
             from,
             from.clone().add(to).multiplyScalar(0.5).normalize().multiplyScalar(2.05),
             to
         );
-        return new THREE.BufferGeometry().setFromPoints(curve.getPoints(24));
+        const geometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(24));
+        const material = new THREE.LineBasicMaterial({
+            color: "#d4d4d8",
+            transparent: true,
+            opacity: 0,
+        });
+        return new THREE.Line(geometry, material);
     }, [from, to]);
 
     useFrame(() => {
-        const line = lineRef.current;
-        if (!line) return;
         const t = THREE.MathUtils.clamp((progressRef.current - appear) / 0.12, 0, 1);
-        const mat = line.material as THREE.LineBasicMaterial;
-        mat.opacity = t * 0.35;
+        (lineObject.material as THREE.LineBasicMaterial).opacity = t * 0.35;
     });
 
-    return (
-        <line ref={lineRef} geometry={geometry}>
-            <lineBasicMaterial color="#d4d4d8" transparent opacity={0} />
-        </line>
-    );
+    return <primitive object={lineObject} />;
 }
 
 function activeNode(progress: number) {
