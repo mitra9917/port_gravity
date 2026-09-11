@@ -84,17 +84,14 @@ export function ExperimentLab() {
                     ))}
                 </h2>
 
-                <div
-                    className="surface-soft mt-16 grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3"
-                    style={{ backgroundColor: LAB_STONE }}
-                >
+                <div className="mt-16 grid grid-cols-1 gap-3 overflow-visible sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
                     {experiments.map((item, index) => (
                         <Link
                             key={item.id}
                             href={item.href}
                             data-cursor={item.href.startsWith("http") ? "open" : "view"}
-                            className="group relative isolate overflow-hidden p-8 transition-all duration-700 ease-premium motion-safe:hover:scale-[1.008]"
-                            style={{ backgroundColor: LAB_WHITE }}
+                            className="group relative isolate z-0 overflow-hidden rounded-2xl border p-8 transition-all duration-500 ease-premium motion-safe:hover:z-20 motion-safe:hover:scale-[1.045] motion-safe:hover:border-[#d8d4cd] motion-safe:hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.14)]"
+                            style={{ backgroundColor: LAB_WHITE, borderColor: LAB_STONE }}
                         >
                             <div
                                 aria-hidden
@@ -114,12 +111,6 @@ export function ExperimentLab() {
                                     opacity: 0.85,
                                 }}
                             />
-                            <div
-                                aria-hidden
-                                className="pointer-events-none absolute inset-0 z-0 border transition-colors duration-700 group-hover:border-[#d8d4cd]"
-                                style={{ borderColor: `${LAB_STONE}` }}
-                            />
-
                             <div className="relative z-10">
                                 <p className="font-mono text-[10px] tracking-[0.18em] text-zinc-400 transition-colors duration-700 group-hover:text-zinc-500">
                                     {item.id}

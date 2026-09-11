@@ -116,10 +116,10 @@ export function SkillsConstellation() {
                 </p>
 
                 <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
-                    <SoftPanel className="flex min-h-[22rem] items-center justify-center p-6 sm:p-8">
+                    <SoftPanel className="flex min-h-[28rem] items-center justify-center p-4 sm:min-h-[32rem] sm:p-6 lg:min-h-[36rem]">
                         <svg
                             viewBox="0 0 100 100"
-                            className="h-auto w-full max-w-md overflow-visible lg:max-w-lg"
+                            className="h-full w-full min-h-[24rem] max-h-[34rem] overflow-visible sm:min-h-[28rem] lg:min-h-[32rem]"
                             role="img"
                             aria-label="Skills constellation with systems at the center"
                         >
@@ -133,7 +133,7 @@ export function SkillsConstellation() {
                                         x2={cluster.orbit!.x}
                                         y2={cluster.orbit!.y}
                                         stroke={active === cluster.id ? LAB_STONE_DARK : LAB_STONE}
-                                        strokeWidth={active === cluster.id ? "0.36" : "0.26"}
+                                        strokeWidth={active === cluster.id ? "0.42" : "0.3"}
                                         strokeLinecap="round"
                                     />
                                 ))}
@@ -172,19 +172,20 @@ export function SkillsConstellation() {
                                 <circle
                                     cx="50"
                                     cy="50"
-                                    r="9"
+                                    r="11"
                                     fill={active === "systems" ? LAB_STONE : LAB_WHITE}
                                     stroke={active === "systems" ? LAB_INK : LAB_STONE_DARK}
-                                    strokeWidth="0.35"
+                                    strokeWidth="0.4"
                                 />
                                 <text
                                     x="50"
-                                    y="51"
+                                    y="51.2"
                                     textAnchor="middle"
                                     fill={LAB_INK}
-                                    fontSize="2.4"
+                                    fontSize="3.1"
+                                    fontWeight="500"
                                     fontFamily="var(--font-geist-mono), ui-monospace, monospace"
-                                    letterSpacing="0.14em"
+                                    letterSpacing="0.1em"
                                 >
                                     SYSTEMS
                                 </text>
@@ -205,10 +206,10 @@ export function SkillsConstellation() {
                                             <circle
                                                 cx={cluster.orbit!.x}
                                                 cy={cluster.orbit!.y}
-                                                r="10"
+                                                r="12"
                                                 fill="none"
                                                 stroke={LAB_STONE_DARK}
-                                                strokeWidth="0.2"
+                                                strokeWidth="0.22"
                                                 opacity="0.6"
                                             >
                                                 <animate
@@ -222,19 +223,20 @@ export function SkillsConstellation() {
                                         <circle
                                             cx={cluster.orbit!.x}
                                             cy={cluster.orbit!.y}
-                                            r="7.2"
+                                            r="8.8"
                                             fill={active === cluster.id ? LAB_STONE : LAB_IVORY}
                                             stroke={active === cluster.id ? LAB_INK : LAB_STONE_DARK}
-                                            strokeWidth="0.32"
+                                            strokeWidth="0.36"
                                         />
                                         <text
                                             x={cluster.orbit!.x}
-                                            y={cluster.orbit!.y + 0.7}
+                                            y={cluster.orbit!.y + 0.85}
                                             textAnchor="middle"
                                             fill={active === cluster.id ? LAB_INK : LAB_INK_MUTED}
-                                            fontSize="2"
+                                            fontSize="2.75"
+                                            fontWeight="500"
                                             fontFamily="var(--font-geist-mono), ui-monospace, monospace"
-                                            letterSpacing="0.12em"
+                                            letterSpacing="0.08em"
                                         >
                                             {cluster.label}
                                         </text>
