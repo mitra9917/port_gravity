@@ -1,111 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { ScrollSequence } from "@/components/animation/ScrollSequence";
-import { TextMask } from "@/components/animation/TextMask";
-import { Scroll3DViewer } from "@/components/animation/Scroll3DViewer";
-import { ArrowRight } from "lucide-react";
+import { HeroStage } from "@/components/hero/HeroStage";
+import { AboutEditorial } from "@/components/sections/AboutEditorial";
+import { ProjectSneakPeek } from "@/components/sections/ProjectSneakPeek";
+import { CodeToProduct } from "@/components/sections/CodeToProduct";
+import { SystemArchitecture } from "@/components/sections/SystemArchitecture";
+import { ContactCinematic } from "@/components/sections/ContactCinematic";
 
-
+const ScrollGlobe = dynamic(
+  () => import("@/components/globe/ScrollGlobe").then((mod) => mod.ScrollGlobe),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full min-h-screen bg-black">
-      {/* Hero Animation Section */}
-      <section className="relative w-full bg-black z-0">
+    <div className="flex min-h-screen w-full flex-col bg-black">
+      <section className="relative z-0 -mt-20 w-full bg-black">
         <ScrollSequence
           frameCount={192}
           folderPath="/assets"
           playOnce={false}
-        />
-
-        {/* Absolute overlay at the very bottom of the scroll sequence container if we wanted it to overlay perfectly at the end, 
-            but standard scrollflow handles this elegantly by placing the next section organically below it. 
-        */}
-      </section>
-
-      {/* Content that fades in AFTER animation ends */}
-      <section className="relative z-10 w-full bg-black rounded-t-[20rem] -mt-12 pt-32 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} // Custom spring-like easing
-          className="max-w-4xl mx-auto space-y-8"
         >
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-foreground leading-[1.1]">
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">
-              Shubham
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-foreground/50 text-balance max-w-2xl mx-auto font-light">
-            Computer Science undergraduate developing end-to-end web applications,
-            combining modern frontend engineering, scalable backend logic,
-            and early-stage AI integrations.
-          </p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-16"
-          >
-            <button className="flex items-center justify-center gap-3 group w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-medium tracking-wide hover:scale-105 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-              <a href="./assets/MY_RESUME.pdf" target="_blank" rel="noopener noreferrer">
-                <span>Explore my Resume</span>
-              </a>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-500" />
-            </button>
-          </motion.div>
-        </motion.div>
+          {(progress) => <HeroStage progress={progress} />}
+        </ScrollSequence>
       </section>
 
-      {/* Text Mask Transition Section */}
-      <TextMask text="DISCOVER" />
+      <ScrollGlobe />
 
-      {/* 3D WebGL Scroll Scrubber */}
-      <Scroll3DViewer />
+      <AboutEditorial />
 
-      {/* Final cards section with breathing room after the sticky WebGL scene */}
-      <section className="min-h-screen w-full bg-background flex items-center justify-center pt-[35vh] pb-40">
-        <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white/40">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/40 transition-colors duration-500"
-          >
-            <h3 className="text-white/80 group-hover:text-[#00FFFF] font-medium mb-4 text-lg transition-colors duration-500">Systems Thinking</h3>
-            <p className="text-sm leading-relaxed">Approaching projects by thinking about how different parts of an application
-              work together, from user interface to basic backend logic.</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/40 transition-colors duration-500"
-          >
-            <h3 className="text-white/80 group-hover:text-[#00FFFF] font-medium mb-4 text-lg transition-colors duration-500">Full-Stack Foundations</h3>
-            <p className="text-sm leading-relaxed">Building complete web applications by working across frontend features
-              and foundational backend functionality.</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="group p-10 border border-white/5 rounded-3xl bg-white/[0.01] hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/40 transition-colors duration-500"
-          >
-            <h3 className="text-white/80 group-hover:text-[#00FFFF] font-medium mb-4 text-lg transition-colors duration-500">Applied AI</h3>
-            <p className="text-sm leading-relaxed">Exploring practical AI features such as intelligent automation,
-              data-driven insights, and AI-assisted user workflows in real projects.</p>
-          </motion.div>
-        </div>
-      </section>
+      <ProjectSneakPeek />
+
+      <CodeToProduct />
+
+      <SystemArchitecture />
+
+      <ContactCinematic />
     </div>
   );
 }

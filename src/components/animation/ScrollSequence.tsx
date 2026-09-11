@@ -1,8 +1,10 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useRef, useEffect, type ReactNode } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent, useMotionTemplate, useSpring, type MotionValue } from "framer-motion";
 import { useSpriteSheet } from "@/hooks/animation/useSpriteSheet";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 interface ScrollSequenceProps {
@@ -13,6 +15,7 @@ interface ScrollSequenceProps {
     fallbackColor?: string;
     playOnce?: boolean;
     onComplete?: () => void;
+    children?: ReactNode | ((scrollYProgress: MotionValue<number>) => ReactNode);
 }
 
 export function ScrollSequence({
@@ -22,7 +25,8 @@ export function ScrollSequence({
     containerClassName,
     fallbackColor = "#000000",
     playOnce = false,
-    onComplete
+    onComplete,
+    children
 }: ScrollSequenceProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -42,6 +46,15 @@ export function ScrollSequence({
         folderPath,
         sheetCount: 8
     });
+    const reduceMotion = usePrefersReducedMotion();
+    const isMobile = useMediaQuery("(max-width: 767px)");
+
+    const keyBrightness = useTransform(scrollYProgress, [0.18, 0.4, 0.66], [1, 1.08, 1.16]);
+    const rawScale = useTransform(scrollYProgress, [0.2, 0.42, 0.55, 0.8], [1, 1.02, 1.1, 1.32]);
+    const keyScale = useSpring(rawScale, { stiffness: 70, damping: 26, mass: 0.7 });
+    const keyY = useTransform(scrollYProgress, [0.2, 0.42, 0.8], [0, -8, 12]);
+    const keyFilter = useMotionTemplate`brightness(${keyBrightness}) contrast(1.04)`;
+    const canvasFade = useTransform(scrollYProgress, [0.56, 0.84], [1, 0.18]);
 
     // Map scroll progress (0-1) to frame index (0 to frameCount - 1)
     const currentFrameIndex = useTransform(
@@ -200,7 +213,7 @@ export function ScrollSequence({
             // Replace unreliable vh unit on mobile devices with an absolute pixel calculation factor.
             // SVH (small viewport height) supports iOS Safari bottom bars properly. 
             // We use a high multiplier to stretch the "track" that the canvas will animate along.
-            style={{ height: `${frameCount * 2}svh` }}
+            style={{ height: `${frameCount * (isMobile ? 1.15 : 2)}svh` }}
         >
             <div className="sticky top-0 w-full h-[100svh] overflow-hidden flex items-center justify-center bg-black">
                 {/* Loading overlay */}
@@ -220,14 +233,36 @@ export function ScrollSequence({
                 )}
 
                 {/* The canvas that renders the frames */}
-                <canvas
-                    ref={canvasRef}
-                    className={cn(
-                        "w-full h-full object-cover transition-opacity duration-1000",
-                        loaded ? "opacity-100" : "opacity-0",
-                        className
-                    )}
-                />
+                <motion.div
+                    className="h-full w-full"
+                    style={
+                        reduceMotion
+                            ? undefined
+                            : {
+                                scale: keyScale,
+                                y: keyY,
+                                filter: keyFilter,
+                                opacity: canvasFade,
+                                originX: 0.5,
+                                originY: 0.58,
+                            }
+                    }
+                >
+                    <canvas
+                        ref={canvasRef}
+                        className={cn(
+                            "w-full h-full object-cover transition-opacity duration-1000",
+                            loaded ? "opacity-100" : "opacity-0",
+                            className
+                        )}
+                    />
+                </motion.div>
+
+                {children && (
+                    <div className="pointer-events-none absolute inset-0 z-20">
+                        {typeof children === "function" ? children(scrollYProgress) : children}
+                    </div>
+                )}
             </div>
         </div>
     );

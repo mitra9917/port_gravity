@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { Mail, ArrowRight, Github, Twitter, Linkedin } from "lucide-react";
+import { Mail, ArrowRight } from "lucide-react";
 
 export default function Contact() {
     const [formState, setFormState] = useState({
@@ -83,11 +83,14 @@ export default function Contact() {
                     {/* Left Column: Contact Info & Message */}
                     <div className="space-y-12">
                         <motion.div variants={itemVariants}>
-                            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
-                                Let&apos;s <span className="text-white/40">Connect</span>
+                            <h1 className="type-display text-display-sm mb-6">
+                                Let&apos;s build
+                                <span className="block">something</span>
+                                <span className="block text-white/40">great.</span>
                             </h1>
                             <p className="text-xl md:text-2xl text-white/50 leading-relaxed max-w-md font-light">
-                                Whether you have a project in mind, a question about my work, or just want to say hi, I&apos;m always open to discussing new opportunities.
+                                Open to internships, collaborations, interesting projects,
+                                and conversations about technology.
                             </p>
                         </motion.div>
 
@@ -96,27 +99,24 @@ export default function Contact() {
                                 <span className="text-sm font-medium text-white/40 mb-2 uppercase tracking-widest">Email</span>
                                 <a
                                     href="mailto:work.shubham.dev@gmail.com"
-                                    className="text-2xl md:text-3xl font-light hover:text-[#00FFFF] transition-colors inline-flex items-center gap-4"
+                                    className="inline-flex items-center gap-4 text-2xl font-light transition-colors hover:text-foreground md:text-3xl"
                                 >
                                     work.shubham.dev@gmail.com
                                     <ArrowRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                                 </a>
                             </div>
 
-                            <div className="group flex flex-col pt-6">
-                                <span className="text-sm font-medium text-white/40 mb-4 uppercase tracking-widest">Socials</span>
-                                <div className="flex gap-6">
-                                    <a href="https://github.com/mitra9917" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-[#00FFFF] hover:scale-110 transition-all duration-300">
-                                        <span className="sr-only">GitHub</span>
-                                        <Github className="w-6 h-6" />
+                            <div className="flex flex-col pt-6">
+                                <span className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">Socials</span>
+                                <div className="flex flex-wrap gap-8 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                                    <a href="https://www.linkedin.com/in/shubham-kumar-mitra-335626336/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">
+                                        LinkedIn
                                     </a>
-                                    <a href="https://x.com/mitra9917" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-[#00FFFF] hover:scale-110 transition-all duration-300">
-                                        <span className="sr-only">Twitter</span>
-                                        <Twitter className="w-6 h-6" />
+                                    <a href="https://github.com/mitra9917" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">
+                                        GitHub
                                     </a>
-                                    <a href="https://www.linkedin.com/in/shubham-kumar-mitra-335626336/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-[#00FFFF] hover:scale-110 transition-all duration-300">
-                                        <span className="sr-only">LinkedIn</span>
-                                        <Linkedin className="w-6 h-6" />
+                                    <a href="https://x.com/mitra9917" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">
+                                        X
                                     </a>
                                 </div>
                             </div>
@@ -124,9 +124,7 @@ export default function Contact() {
                     </div>
 
                     {/* Right Column: Contact Form */}
-                    <motion.div variants={itemVariants} className="bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                        {/* Decorative gradient orb */}
-                        <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-white opacity-[0.03] rounded-full blur-3xl pointer-events-none" />
+                    <motion.div variants={itemVariants} className="relative rounded-2xl border border-white/[0.08] p-8 md:p-12">
 
                         <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
                             <div className="space-y-2">
@@ -141,7 +139,7 @@ export default function Contact() {
                                     onChange={handleChange}
                                     required
                                     placeholder="Name"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
                                 />
                             </div>
 
@@ -157,7 +155,7 @@ export default function Contact() {
                                     onChange={handleChange}
                                     required
                                     placeholder="abc@example.com"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
                                 />
                             </div>
 
@@ -173,14 +171,14 @@ export default function Contact() {
                                     required
                                     rows={5}
                                     placeholder="Tell me about your project..."
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all resize-none"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all resize-none"
                                 />
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full relative flex items-center justify-center gap-2 bg-white text-black font-semibold rounded-xl py-4 mt-4 overflow-hidden group hover:text-[#00FFFF] hover:scale-105 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:opacity-70 disabled:hover:scale-100"
+                                className="group relative mt-4 flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-white py-4 font-semibold text-black transition-all duration-500 ease-premium hover:bg-white/90 disabled:opacity-70"
                             >
                                 {isSubmitting ? (
                                     <span className="flex flex-row items-center gap-2">

@@ -16,11 +16,12 @@ const interactiveSelector = [
 export function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  const springX = useSpring(cursorX, { stiffness: 450, damping: 34, mass: 0.4 });
-  const springY = useSpring(cursorY, { stiffness: 450, damping: 34, mass: 0.4 });
+  const springX = useSpring(cursorX, { stiffness: 500, damping: 40, mass: 0.25 });
+  const springY = useSpring(cursorY, { stiffness: 500, damping: 40, mass: 0.25 });
   const [isEnabled, setIsEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isInteractive, setIsInteractive] = useState(false);
+  const [label, setLabel] = useState("");
 
   useEffect(() => {
     const finePointer = window.matchMedia("(pointer: fine)");
@@ -40,7 +41,13 @@ export function CustomCursor() {
       cursorX.set(event.clientX);
       cursorY.set(event.clientY);
       setIsVisible(true);
-      setIsInteractive(Boolean((event.target as Element | null)?.closest(interactiveSelector)));
+      const target = event.target as Element | null;
+      const typed = target?.closest("[data-cursor]") as HTMLElement | null;
+      const kind = typed?.dataset.cursor;
+      if (kind === "view") setLabel("VIEW");
+      else if (kind === "open") setLabel("OPEN ↗");
+      else setLabel("");
+      setIsInteractive(Boolean(kind || target?.closest(interactiveSelector)));
     };
 
     const handlePointerLeave = () => setIsVisible(false);
@@ -62,7 +69,7 @@ export function CustomCursor() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[100] mix-blend-difference" aria-hidden="true">
       <motion.div
-        className="fixed left-0 top-0 rounded-full border border-white/70"
+        className="fixed left-0 top-0 rounded-full bg-white"
         style={{
           x: springX,
           y: springY,
@@ -70,28 +77,22 @@ export function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          width: isInteractive ? 56 : 32,
-          height: isInteractive ? 56 : 32,
+          width: isInteractive ? 14 : 6,
+          height: isInteractive ? 14 : 6,
           opacity: isVisible ? 1 : 0,
-          scale: isInteractive ? 1.08 : 1,
         }}
-        transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
       />
-
       <motion.div
-        className="fixed left-0 top-0 h-2 w-2 rounded-full bg-white shadow-[0_0_24px_rgba(255,255,255,0.75)]"
+        className="fixed left-4 top-3 font-mono text-[9px] tracking-[0.18em] text-white"
         style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
+          x: springX,
+          y: springY,
         }}
-        animate={{
-          opacity: isVisible ? 1 : 0,
-          scale: isInteractive ? 0.45 : 1,
-        }}
-        transition={{ duration: 0.12, ease: "easeOut" }}
-      />
+        animate={{ opacity: isVisible && label ? 1 : 0 }}
+      >
+        {label}
+      </motion.div>
     </div>
   );
 }

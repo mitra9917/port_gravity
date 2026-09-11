@@ -4,67 +4,129 @@
 
 @layer base {
   :root {
-    --background: 240 2% 4%;
-    /* Near black with a tiny cool tint */
-    --foreground: 0 0% 98%;
-    --glow1: 240 2% 6%;
-    /* Extremely faint baseline glow */
-    --glow2: 240 2% 5%;
+    --background: 240 3% 4%;
+    --foreground: 40 6% 96%;
+    --muted: 240 4% 58%;
+    --border: 0 0% 100%;
+    --glow: 210 12% 14%;
+    --ease-out-premium: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Premium Morning: Extremely subtle cool dawn gray */
-  .theme-morning {
-    --background: 220 5% 5%;
-    --foreground: 210 10% 95%;
-    --glow1: 215 15% 9%;
-    /* Barely perceptive cool blue/gray */
-    --glow2: 240 10% 6%;
-  }
-
-  /* Premium Afternoon: Clean, stark monotonic neutral */
-  .theme-afternoon {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 98%;
-    --glow1: 40 10% 8%;
-    /* Very faint warm grey */
-    --glow2: 200 5% 6%;
-  }
-
-  /* Premium Golden Hour: Deep obsidian with the faintest copper hint */
-  .theme-golden-hour {
-    --background: 20 8% 4%;
-    --foreground: 30 10% 95%;
-    --glow1: 20 20% 8%;
-    /* Ultra subtle warm copper */
-    --glow2: 10 15% 6%;
-  }
-
-  /* Premium Night: Black out monotonic */
+  /* Time-of-day classes stay for compatibility; they no longer shift hue. */
+  .theme-morning,
+  .theme-afternoon,
+  .theme-golden-hour,
   .theme-night {
-    --background: 0 0% 2%;
-    /* Almost pitch black */
-    --foreground: 0 0% 98%;
-    --glow1: 240 10% 6%;
-    /* Deep empty space */
-    --glow2: 220 10% 4%;
+    --background: 240 3% 4%;
+    --foreground: 40 6% 96%;
+    --muted: 240 4% 58%;
+    --border: 0 0% 100%;
+    --glow: 210 12% 14%;
   }
-}
 
-body {
-  color: hsl(var(--foreground));
-  background-color: hsl(var(--background));
-  background-image:
-    radial-gradient(ellipse at 85% 5%, hsl(var(--glow1) / 0.8), transparent 50%),
-    radial-gradient(ellipse at 15% 95%, hsl(var(--glow2) / 0.8), transparent 50%);
-  background-attachment: fixed;
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 2.5s ease-in-out, color 2.5s ease-in-out;
+  html {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  body {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(
+      ellipse 80% 50% at 80% 0%,
+      hsl(var(--glow) / 0.35),
+      transparent 55%
+    );
+    background-attachment: fixed;
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+  }
+
+  ::selection {
+    background: hsl(var(--foreground) / 0.14);
+    color: hsl(var(--foreground));
+  }
+
+  :focus-visible {
+    outline: 1px solid hsl(var(--foreground) / 0.45);
+    outline-offset: 3px;
+  }
 }
 
 @media (pointer: fine) {
   .custom-cursor-enabled,
   .custom-cursor-enabled * {
     cursor: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@layer components {
+  .type-kicker {
+    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: hsl(var(--muted));
+  }
+
+  .type-display {
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .type-body {
+    color: hsl(var(--muted));
+    font-weight: 400;
+    line-height: 1.7;
+    max-width: 38rem;
+  }
+
+  .hairline {
+    border-color: hsl(var(--border) / 0.08);
+  }
+
+  .panel-surface {
+    border: 1px solid rgb(82 82 91 / 0.55);
+    background: rgb(15 15 18 / 0.95);
+    border-radius: 1.25rem;
+    overflow: hidden;
+  }
+
+  .surface-soft {
+    border-radius: 1.25rem;
+    overflow: hidden;
+  }
+
+  .panel-kicker {
+    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(161 161 170);
+  }
+
+  .panel-title {
+    color: rgb(250 250 250);
+  }
+
+  .panel-body {
+    color: rgb(228 228 231);
+  }
+
+  .panel-muted {
+    color: rgb(161 161 170);
+  }
+
+  .panel-chip {
+    border: 1px solid rgb(113 113 122 / 0.65);
+    background: rgb(39 39 42 / 0.9);
+    color: rgb(244 244 245);
   }
 }
 

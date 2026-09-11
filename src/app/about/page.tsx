@@ -138,17 +138,20 @@ export default function About() {
                     className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24"
                 >
                     <motion.div variants={fadeIn} className="space-y-8">
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
-                            Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">Shubham</span>
+                        <p className="font-mono text-[11px] tracking-[0.18em] text-muted">01 / ABOUT</p>
+                        <h1 className="type-display text-display-sm">
+                            More than
+                            <span className="block">just a</span>
+                            <span className="block">developer.</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-white/50 leading-relaxed font-light">
-                            I’m a Computer Science undergraduate exploring full-stack development,
+                            I’m Shubham, a Computer Science undergraduate exploring full-stack development,
                             combining interactive user interfaces with backend logic and early-stage AI concepts.
                         </p>
                     </motion.div>
 
                     <motion.div variants={fadeIn} className="relative aspect-square w-full max-w-md mx-auto md:ml-auto">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-white/10 rounded-3xl border border-white/10 shadow-2xl overflow-hidden pointer-events-none">
+                        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl border border-white/10">
                             <DistortedImage src="/Professional_mitra.png" className="opacity-80 mix-blend-screen" />
                         </div>
                     </motion.div>
@@ -206,11 +209,11 @@ export default function About() {
                             <motion.article
                                 key={item.title}
                                 variants={fadeIn}
-                                className="group rounded-2xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-[#00FFFF]/30 transition-colors"
+                                className="group rounded-2xl border border-white/[0.06] bg-transparent p-6 transition-colors hover:border-white/16 hover:bg-white/[0.02]"
                             >
                                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                                     <div className="space-y-2">
-                                        <h3 className="text-xl font-semibold group-hover:text-[#00FFFF] transition-colors">
+                                        <h3 className="text-xl font-semibold transition-colors group-hover:text-foreground">
                                             {item.title}
                                         </h3>
                                         <p className="text-sm text-white/45">{item.meta}</p>
@@ -253,7 +256,7 @@ export default function About() {
                         <div className="space-y-6 border-l border-white/10 pl-6 ml-3">
                             <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/40 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">B.Tech. Computer Science</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-foreground transition-colors">B.Tech. Computer Science</h4>
                                 <p className="text-white/50 text-sm mb-2">Vellore Institute of Technology • 2024 - 2028</p>
                                 <p className="text-white/70 text-sm">Currently pursuing a Bachelor’s degree in Computer Science,
                                     with coursework covering programming fundamentals, data structures,
@@ -262,28 +265,28 @@ export default function About() {
 
                             <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Web Design Specialist Certification</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-foreground transition-colors">Web Design Specialist Certification</h4>
                                 <p className="text-white/50 text-sm mb-2">Figma • 2025</p>
                                 <p className="text-white/70 text-sm">Focused on clean UI, typography in digital spaces, and advanced prototyping.</p>
                             </motion.div>
 
                             <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Exploring Networking with Cisco Packet Tracer</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-foreground transition-colors">Exploring Networking with Cisco Packet Tracer</h4>
                                 <p className="text-white/50 text-sm mb-2">Cisco Networking Academy • 2025</p>
                                 <p className="text-white/70 text-sm">Built wired and wireless networks using Cisco Packet Tracer & Configured routers, switches, and wireless devices</p>
                             </motion.div>
 
                             <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Introduction to Agile Development and Scrum</h4>
+                                <h4 className="text-lg font-semibold group-hover:text-foreground transition-colors">Introduction to Agile Development and Scrum</h4>
                                 <p className="text-white/50 text-sm mb-2">IBM • 2026</p>
                                 <p className="text-white/70 text-sm">Kanban board created as part of the Agile Scrum final project, demonstrating end-to-end workflow management using GitHub Projects. The board includes Icebox, Product Backlog and other Reiterative methodologies.</p>
                             </motion.div>
 
                             <motion.div variants={fadeIn} className="group relative">
                                 <div className="absolute -left-[29px] top-1 w-2 h-2 rounded-full bg-white/20 ring-4 ring-black" />
-                                <h4 className="text-lg font-semibold group-hover:text-[#00FFFF] transition-colors">Supervised Machine Learning: Regression and Classification </h4>
+                                <h4 className="text-lg font-semibold group-hover:text-foreground transition-colors">Supervised Machine Learning: Regression and Classification </h4>
                                 <p className="text-white/50 text-sm mb-2">DeepLearning.AI • 2026</p>
                                 <p className="text-white/70 text-sm">Completed DeepLearning.AI’s Supervised Machine Learning course, covering core regression and classification techniques used to build predictive models. Gained practical understanding of model training, cost functions, gradient descent, and evaluation for real-world machine learning problems.</p>
                             </motion.div>
@@ -307,11 +310,11 @@ export default function About() {
                             {toolkitCards.map(({ title, subtitle, icon: Icon }) => (
                                 <div
                                     key={title}
-                                    className="group min-h-36 p-5 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col justify-between gap-4 hover:bg-white/[0.05] hover:border-[#00FFFF]/40 transition-colors"
+                                    className="group flex min-h-36 flex-col justify-between gap-4 rounded-2xl border border-white/[0.06] bg-transparent p-5 transition-colors hover:border-white/16 hover:bg-white/[0.02]"
                                 >
                                     <Icon className="w-5 h-5 text-white/40" />
                                     <div className="flex flex-col gap-2">
-                                        <span className="font-medium leading-tight group-hover:text-[#00FFFF] transition-colors">{title}</span>
+                                        <span className="font-medium leading-tight group-hover:text-foreground transition-colors">{title}</span>
                                         <span className="text-xs leading-relaxed text-white/50">{subtitle}</span>
                                     </div>
                                 </div>

@@ -90,6 +90,8 @@ function DistortedImageMaterial({ src }: { src: string }) {
 }
 
 import { Canvas } from '@react-three/fiber';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 interface DistortedImageProps {
     src: string;
@@ -97,11 +99,26 @@ interface DistortedImageProps {
 }
 
 export function DistortedImage({ src, className }: DistortedImageProps) {
+    const reduceMotion = usePrefersReducedMotion();
+    const isMobile = useMediaQuery("(max-width: 767px)");
+
+    if (reduceMotion || isMobile) {
+        return (
+            <div className={`relative h-full w-full overflow-hidden ${className || ""}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt="" className="h-full w-full object-cover" />
+            </div>
+        );
+    }
+
     return (
-        <div className={`relative w-full h-full overflow-hidden rounded-2xl ${className || ''}`}>
+        <div className={`relative w-full h-full overflow-hidden ${className || ''}`}>
             <Canvas
                 className="absolute inset-0 pointer-events-none"
                 camera={{ position: [0, 0, 4] }}
+                dpr={[1, 1.25]}
+                frameloop="always"
+                gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
             >
                 <DistortedImageMaterial src={src} />
             </Canvas>

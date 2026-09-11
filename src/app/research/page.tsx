@@ -1,5 +1,6 @@
 "use client";
 
+import { ResearchTemporalGraph } from "@/components/sections/ResearchTemporalGraph";
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, BookOpen, FileText, FlaskConical, Microscope } from "lucide-react";
 import Link from "next/link";
@@ -42,7 +43,9 @@ const blogItems = [
 
 export default function ResearchPage() {
     return (
-        <div className="flex flex-col w-full min-h-screen bg-black text-white pt-40 pb-32">
+        <div className="flex min-h-screen w-full flex-col bg-black text-white pt-16 pb-32">
+            <ResearchTemporalGraph />
+
             <div className="container mx-auto px-6 max-w-6xl">
                 <motion.div
                     variants={staggerContainer}
@@ -54,7 +57,7 @@ export default function ResearchPage() {
                         <Microscope className="h-4 w-4" />
                         Research & Writing
                     </motion.div>
-                    <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-tight">
+                    <motion.h1 variants={fadeUp} className="type-display text-display-sm mb-8">
                         Research <span className="text-white/40">Notes</span>
                     </motion.h1>
                     <motion.p variants={fadeUp} className="text-xl md:text-2xl text-white/50 max-w-3xl leading-relaxed text-balance font-light">
@@ -80,16 +83,16 @@ export default function ResearchPage() {
                                 <motion.article
                                     key={item.title}
                                     variants={fadeUp}
-                                    className="group rounded-3xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-[#00FFFF]/35 transition-colors duration-500"
+                                    className="group rounded-2xl border border-white/[0.06] bg-transparent p-6 transition-colors duration-500 hover:border-white/16 hover:bg-white/[0.02]"
                                 >
                                     <div className="flex items-start justify-between gap-6">
                                         <div className="space-y-3">
                                             <p className="text-xs uppercase tracking-widest text-white/35">{item.context}</p>
-                                            <h3 className="text-2xl font-semibold leading-tight group-hover:text-[#00FFFF] transition-colors">
+                                            <h3 className="text-2xl font-semibold leading-tight group-hover:text-foreground transition-colors">
                                                 {item.title}
                                             </h3>
                                         </div>
-                                        <ArrowUpRight className="h-5 w-5 shrink-0 text-white/30 group-hover:text-[#00FFFF] transition-colors" />
+                                        <ArrowUpRight className="h-5 w-5 shrink-0 text-white/30 group-hover:text-foreground transition-colors" />
                                     </div>
                                     <p className="mt-5 text-sm leading-relaxed text-white/60">{item.description}</p>
                                     <div className="mt-5 flex flex-wrap gap-2">
@@ -121,13 +124,13 @@ export default function ResearchPage() {
                                 <motion.article
                                     key={item.title}
                                     variants={fadeUp}
-                                    className="group rounded-3xl border border-white/5 bg-white/[0.015] p-6 hover:bg-[#00FFFF]/10 hover:border-[#00FFFF]/35 transition-colors duration-500"
+                                    className="group rounded-2xl border border-white/[0.06] bg-transparent p-6 transition-colors duration-500 hover:border-white/16 hover:bg-white/[0.02]"
                                 >
                                     <div className="flex items-start gap-4">
                                         <FileText className="mt-1 h-5 w-5 shrink-0 text-white/35" />
                                         <div>
                                             <p className="mb-3 text-xs uppercase tracking-widest text-white/35">{item.type}</p>
-                                            <h3 className="text-2xl font-semibold leading-tight group-hover:text-[#00FFFF] transition-colors">
+                                            <h3 className="text-2xl font-semibold leading-tight group-hover:text-foreground transition-colors">
                                                 {item.title}
                                             </h3>
                                             <p className="mt-4 text-sm leading-relaxed text-white/60">{item.description}</p>
@@ -135,7 +138,7 @@ export default function ResearchPage() {
                                                 href={item.href}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-[#00FFFF] transition-colors"
+                                                className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-foreground"
                                             >
                                                 Read official blog
                                                 <ArrowUpRight className="h-4 w-4" />
