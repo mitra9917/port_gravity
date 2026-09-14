@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { ScrollSequence } from "@/components/animation/ScrollSequence";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { AboutEditorial } from "@/components/sections/AboutEditorial";
-import { ProjectSneakPeek } from "@/components/sections/ProjectSneakPeek";
 import { CodeToProduct } from "@/components/sections/CodeToProduct";
 import { SystemArchitecture } from "@/components/sections/SystemArchitecture";
 import { ContactCinematic } from "@/components/sections/ContactCinematic";
@@ -30,8 +29,6 @@ export default function Home() {
       <ScrollGlobe />
 
       <AboutEditorial />
-
-      <ProjectSneakPeek />
 
       <CodeToProduct />
 
