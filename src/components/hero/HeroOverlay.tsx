@@ -53,11 +53,6 @@ export function HeroOverlay({ progress }: { progress: MotionValue<number> }) {
             >
                 {/* Copy stays in the upper band — keyboard keeps the lower frame */}
                 <div className="max-w-lg">
-                    <p className="type-kicker mb-6 text-white/65">
-                        <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-white/80" aria-hidden />
-                        Available for opportunities
-                    </p>
-
                     <h1 className="type-display text-display text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.45)]">
                         {headline.map((line, index) => (
                             <motion.span
@@ -102,7 +97,7 @@ export function HeroOverlay({ progress }: { progress: MotionValue<number> }) {
                             About Me ↗
                         </Link>
                         <a
-                            href="/assets/MY_RESUME.pdf"
+                            href="/assets/Shubham_ResumeFB.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="pointer-events-auto text-sm tracking-wide text-white/55 transition-colors hover:text-white"

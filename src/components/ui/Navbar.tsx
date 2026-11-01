@@ -60,11 +60,6 @@ export function Navbar() {
         : isSolidNav || !useBlendNav
           ? "bg-foreground/70"
           : "bg-white/70";
-    const statusDot = useLightNavText
-        ? "bg-zinc-700"
-        : isSolidNav || !useBlendNav
-          ? "bg-foreground/75"
-          : "bg-white/75";
 
     return (
         <>
@@ -119,15 +114,6 @@ export function Navbar() {
                     </nav>
 
                     <div className="hidden items-center justify-end gap-5 lg:flex">
-                        <p
-                            className={cn(
-                                "hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.18em] lg:flex",
-                                isSolidNav || !useBlendNav ? "text-muted" : "text-white/80"
-                            )}
-                        >
-                            <span className={cn("h-1.5 w-1.5 rounded-full", statusDot)} aria-hidden />
-                            Available
-                        </p>
                         <Link
                             href="/contact"
                             className={cn(
