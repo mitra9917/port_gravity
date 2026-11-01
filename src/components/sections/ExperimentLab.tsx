@@ -32,7 +32,7 @@ const experiments = [
         title: "Image shader",
         meta: "Vertex + RGB split",
         href: "/about",
-        note: "Scroll-velocity distortion on the about portrait.",
+        note: "Scroll-velocity RGB split shader (DistortedImage component in the codebase).",
     },
     {
         id: "04",
@@ -50,10 +50,10 @@ const experiments = [
     },
     {
         id: "06",
-        title: "Vision game loop",
-        meta: "OpenCV · MediaPipe",
-        href: "/projects/vision_badminton_engine",
-        note: "Gesture-controlled badminton engine — 2.5D court, no full 3D stack.",
+        title: "E-waste recovery flow",
+        meta: "AWS · YOLO · KMS",
+        href: "/projects/regenesis",
+        note: "RE:GENESIS — vision, BOM audit, and signed Second-Life Passports.",
     },
 ];
 

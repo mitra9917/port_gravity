@@ -179,7 +179,7 @@ export function ProjectSpotlight({
                         ref={previewRef}
                         onPointerMove={handlePointerMove}
                         onPointerLeave={resetTilt}
-                        className="sticky top-24 h-[min(72vh,38rem)]"
+                        className="sticky top-24 h-[min(80vh,44rem)]"
                     >
                         <AnimatePresence mode="wait">
                             <ProjectPreviewPanel

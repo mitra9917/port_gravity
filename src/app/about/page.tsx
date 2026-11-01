@@ -16,7 +16,7 @@ import {
     Cloud,
     type LucideIcon,
 } from "lucide-react";
-import { DistortedImage } from "@/components/animation/DistortedImage";
+import { AboutFeaturedSection } from "@/components/sections/AboutFeaturedSection";
 
 const fadeIn: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -152,7 +152,12 @@ export default function About() {
 
                     <motion.div variants={fadeIn} className="relative aspect-square w-full max-w-md mx-auto md:ml-auto">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl border border-white/10">
-                            <DistortedImage src="/Professional_mitra.png" className="opacity-80 mix-blend-screen" />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/myPic.jpg"
+                                alt="Shubham Mitra"
+                                className="h-full w-full scale-[0.999] object-cover object-[50%_28%]"
+                            />
                         </div>
                     </motion.div>
                 </motion.div>
@@ -185,6 +190,8 @@ export default function About() {
                         how thoughtful engineering choices shape reliable and scalable products.
                     </motion.p>
                 </motion.div>
+
+                <AboutFeaturedSection staggerVariants={staggerContainer} />
 
                 {/* Experience Section */}
                 <motion.section

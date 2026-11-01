@@ -3,7 +3,7 @@
 import { projects } from "@/data/projects";
 import { ProjectSpotlight } from "@/components/projects/ProjectSpotlight";
 
-const FEATURED_SLUGS = ["averion_ai", "breathe_map", "port_gravity", "vision_badminton_engine"] as const;
+const FEATURED_SLUGS = ["averion_ai", "breathe_map", "port_gravity", "regenesis"] as const;
 
 const featured = FEATURED_SLUGS
     .map((slug) => projects.find((project) => project.slug === slug))

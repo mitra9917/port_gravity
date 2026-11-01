@@ -3,6 +3,12 @@ export interface Project {
     title: string;
     description: string;
     techStack: string[];
+    /** Optional hero screenshot for project cards (path under /public). */
+    previewImage?: string;
+    /** CSS object-position for preview framing (default `center`). */
+    previewImagePosition?: string;
+    /** How the preview fills its frame (default `cover`). */
+    previewImageFit?: "cover" | "contain";
     liveUrl: string;
     codeUrl: string;
     overview: {
@@ -25,6 +31,9 @@ export const projects: Project[] = [
         slug: "averion_ai",
         title: "Averion.ai",
         description: "A secure RAG platform for uploading internal documents, searching organizational knowledge, and receiving grounded AI answers with source citations.",
+        previewImage: "/projects/averion-ai-preview.png",
+        previewImageFit: "contain",
+        previewImagePosition: "50% 0%",
         techStack: [
             "Next.js 16",
             "React 19",
@@ -52,56 +61,75 @@ export const projects: Project[] = [
         }
     },
     {
-        slug: "sports_companion",
-        title: "Sports Companion",
-        description: "A full-stack sports insights platform with AI-assisted analysis and real-time data presentation.",
-        techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "API Integration", "Basic AI"],
-        liveUrl: "https://sports-companion-app.vercel.app/",
-        codeUrl: "https://github.com/mitra9917/sports-companion-app",
-        overview: {
-            problem: "Many fitness and sports enthusiasts rely on multiple disconnected apps to track workouts, monitor BMI, set goals, and analyze progress. Existing solutions are often cluttered, lack personalization, or fail to present progress data in a clear and motivating way.",
-            solution: "Sports Companion App provides a single, clean platform to log workouts, track BMI, manage fitness goals, and visualize progress through analytics dashboards. It focuses on clarity, usability, and meaningful data presentation to help users stay consistent and informed about their fitness journey.",
-            purpose: "This project was built to strengthen my full-stack development skills by designing a real-world fitness application that spans authentication, database design, UI/UX, analytics visualization, and deployment—while solving a genuine personal fitness tracking problem."
-        },
-        technical: {
-            architecture: "Frontend built using Next.js App Router with reusable, component-driven UI;Supabase Authentication for secure user sign-up and login;PostgreSQL (Supabase) for structured storage of workouts, BMI records, goals, and profiles; Client-side and server-side data fetching for dashboards and analytics; Data visualization using charts for BMI trends, workout distribution, and progress tracking; clean separation between UI components, business logic, and data access layers",
-            challenges: "One of the main challenges was designing a database schema that could handle workouts, goals, and BMI records while maintaining data consistency and integrity. Another challenge was presenting analytics in a way that was visually appealing without overwhelming the user."
-        },
-        outcome: {
-            achieved: "Built a complete end-to-end full-stack fitness application; Gained hands-on experience with Supabase Auth, PostgreSQL, and relational data modeling; Implemented real-time fitness analytics and progress visualization; Successfully deployed and maintained a production-ready web application; Improved understanding of scalable UI design and state-driven dashboards",
-            relevance: "Fitness and health tracking platforms; Data-driven dashboards and analytics applications; SaaS products with authentication and personalized user data; Full-stack web applications requiring structured data, analytics, and clean UI/UX"
-        }
-    }, {
-        slug: "vision_badminton_engine",
-        title: "Vision‑Based Badminton Game Engine",
-        description: "A real-time badminton game engine controlled via computer vision, featuring hand-tracked shot detection, AI-driven rallies, and a ground‑view 2.5D court with realistic gameplay mechanics.",
+        slug: "pitchground",
+        title: "Pitchground",
+        description: "Adaptive multilingual communication training that records baseline and pressure takes, detects where speech breaks under interview conditions, and prescribes targeted retry challenges.",
+        previewImage: "/projects/pitchground-preview.png",
+        previewImageFit: "contain",
+        previewImagePosition: "50% 38%",
         techStack: [
-            "Python",
-            "OpenCV",
-            "MediaPipe",
-            "Computer Vision",
-            "Game State Machines",
-            "AI Logic"
+            "Next.js",
+            "TypeScript",
+            "FastAPI",
+            "Nhost Postgres",
+            "Google OAuth",
+            "Sarvam / OpenAI"
         ],
-        liveUrl: "",
-        codeUrl: "https://github.com/mitra9917/badminton-ai-engine",
+        liveUrl: "https://pitch-ground.vercel.app/",
+        codeUrl: "https://github.com/mitra9917/pitchground",
         overview: {
-            problem: "Most sports games rely on traditional controllers and lack realistic physical interaction, while vision-based sports simulations often fail to provide responsive gameplay or believable spatial depth.",
-            solution: "This engine enables players to control a badminton game using real-time hand movements, translating physical gestures into shot types and rallies within a ground‑view perspective court.",
-            purpose: "The project was built to explore the intersection of computer vision, game engines, and AI-driven interaction by simulating a real sport with gesture-based controls and intelligent opponents."
+            problem: "Interview and presentation skills often degrade under time limits, interruptions, and code-switching between languages, but most coaching tools give generic feedback instead of pinpointing the exact failure mode in a repeatable loop.",
+            solution: "Pitchground runs a structured session: baseline capture, controlled pressure (time limit and interruption), deterministic signal extraction and failure detection, then LLM-assisted diagnosis and a replay challenge on the same knobs so learners compare improvement with evidence chips—not vibes.",
+            purpose: "Built to explore production-shaped adaptive training: paired phone/laptop capture, multilingual metrics (English and Hindi in P0), orchestrated session phases, and honest ML boundaries where scores stay deterministic and LLMs only explain or rephrase."
         },
         technical: {
-            architecture: "A modular Python game loop with OpenCV rendering, MediaPipe-based hand tracking for input, a state-driven game engine for rallies, and rule-based AI for opponent behavior, cleanly separating logic, input, and visuals.",
-            challenges: "Key challenges included stabilizing noisy vision input, synchronizing gesture detection with game states, preventing unrealistic shuttle behavior, and achieving a convincing ground‑view perspective without a full 3D engine."
+            architecture: "Split monorepo: Next.js frontend on Vercel (`pitch-ground.vercel.app`) and FastAPI backend on Render with Google OAuth, JWT sessions, Nhost Postgres for learners/sessions/attempts, and Nhost storage for attempt media. The orchestrator drives a 13-phase state machine; BackgroundTasks run transcription and signal fusion; WebSocket events keep the coach UI in sync with `advance` lockstep.",
+            challenges: "Key challenges included keeping frontend and backend phases aligned without drift, separating deterministic scoring from LLM prose so diagnoses cannot hallucinate new failure types, stubbing ML when APIs are unavailable for demo reliability, and wiring OAuth, CORS, and media upload across local, Vercel, and Render environments."
         },
         outcome: {
-            achieved: "Built a fully playable vision-controlled badminton engine; implemented shot classification, AI rallies, and skill-based catching; designed a 2.5D ground‑view court with perspective, net height illusion, and mesh rendering.",
-            relevance: "Computer vision–driven games; AI-assisted sports simulations; gesture-controlled interfaces; real-time interactive systems; foundations for future full‑3D sports game development."
+            achieved: "Shipped the public landing and demo auth path, deployed frontend and backend with documented env matrices, implemented the adaptive loop architecture (baseline → pressure → diagnose → challenge → compare), and integrated Google sign-in with Nhost-backed persistence for session and media storage.",
+            relevance: "Interview prep products; multilingual communication coaching; adaptive learning loops with evidence-backed feedback; full-stack ML-adjacent systems where deterministic metrics and constrained LLM agents must coexist."
         }
-    }, {
+    },
+    {
+        slug: "regenesis",
+        title: "RE:GENESIS",
+        description: "Adaptive electronics recovery platform—computer vision, BOM completeness audits, RVS-ranked disassembly plans, and KMS-signed Second-Life Passports for enterprise hardware before shredding.",
+        previewImage: "/projects/regenesis-preview.png",
+        previewImageFit: "contain",
+        previewImagePosition: "50% 0%",
+        techStack: [
+            "React",
+            "Vite",
+            "AWS Lambda",
+            "Step Functions",
+            "SageMaker YOLOv8",
+            "DynamoDB",
+            "KMS"
+        ],
+        liveUrl: "http://regenesis-dev-uibucket-13iieilvqhoa.s3-website.ap-south-1.amazonaws.com/",
+        codeUrl: "https://github.com/mitra9917/ReGenesis",
+        overview: {
+            problem: "Most e-waste workflows destroy still-valuable GPUs, RAM, and SSDs for bulk metal recovery, with no tamper-evident lineage for secondary markets and opaque environmental claims.",
+            solution: "RE:GENESIS treats retired servers and laptops as recoverable products: ingest an interior photo, run hybrid YOLO or catalog-assisted detection, audit BOM completeness, plan teardown with a Reuse Value Score, simulate diagnostics, and issue KMS-signed Second-Life Passports with honest impact ranges.",
+            purpose: "Built for Environmental Hacks (Bharat Builds Tour, e-waste track) to demonstrate an end-to-end AWS pipeline—vision, orchestration, cryptography, and operator UI—that judges and operators can trace stage by stage."
+        },
+        technical: {
+            architecture: "React UI on S3 static hosting talks to API Gateway → ingest Lambda → Step Functions `RecoveryFlow` (detect → parse → audit → plan → test → passport → impact). SageMaker serves YOLOv8n with catalog-assisted fallback; Tesseract OCR can confirm model plates; DynamoDB stores devices, components, and events; passports are canonical JSON signed with AWS KMS and verified via API.",
+            challenges: "Major challenges included hybrid vision when the SageMaker endpoint is cold or low-confidence, preventing single-zone failures from collapsing the pipeline, keeping a stable nine-class detection schema across training and inference, and deploying a production UI bundle that calls API Gateway directly without a same-origin proxy."
+        },
+        outcome: {
+            achieved: "Delivered the live multi-page UI, full recovery workflow with visible stage progression, passport verify/tamper demo, impact metrics with cited LCA ranges, SageMaker training/serving scripts, and documented demo path for upload → detect → plan → passport → verify.",
+            relevance: "Circular economy and ITAD platforms; computer vision on hardware teardown; regulated reuse credentials; Step Functions–style auditable pipelines; hackathon-grade AWS architecture with operable fallbacks."
+        }
+    },
+    {
         slug: "breathe_map",
         title: "Breathe Map: ML‑Driven Urban AQI Analytics & Simulation",
         description: "A full-stack air quality analytics platform that models zone-level AQI using trained ML inference, visualizes city-wise pollution patterns on an interactive map, and runs intervention simulations with persistent results in Supabase.",
+        previewImage: "/projects/breathe-map-preview.png",
+        previewImageFit: "cover",
+        previewImagePosition: "50% 42%",
         techStack: [
             "Next.js",
             "TypeScript",
@@ -130,6 +158,9 @@ export const projects: Project[] = [
         slug: "port_gravity",
         title: "Port Gravity",
         description: "A high-performance interactive portfolio framework featuring native scroll storytelling.",
+        previewImage: "/projects/port-gravity-preview.png",
+        previewImageFit: "cover",
+        previewImagePosition: "22% 38%",
         techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Canvas API"],
         liveUrl: "https://port-gravity.vercel.app/",
         codeUrl: "https://github.com/mitra9917/port_gravity",

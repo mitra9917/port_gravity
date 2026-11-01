@@ -104,9 +104,9 @@ export function DistortedImage({ src, className }: DistortedImageProps) {
 
     if (reduceMotion || isMobile) {
         return (
-            <div className={`relative h-full w-full overflow-hidden ${className || ""}`}>
+            <div className={`relative max-h-[98%] max-w-[98%] overflow-hidden ${className || ""}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="" className="h-full w-full object-cover" />
+                <img src={src} alt="" className="max-h-[5%] max-w-[98%] object-cover" />
             </div>
         );
     }
